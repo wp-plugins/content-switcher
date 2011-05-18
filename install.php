@@ -3,11 +3,11 @@
 'analytics_tracking_author' => 'yes',
 'analytics_tracking_contributor' => 'yes',
 'analytics_tracking_editor' => 'yes',
-'analytics_tracking_id' => 'UA-XXXXXXXX-X',
+'analytics_tracking_id' => '',
 'analytics_tracking_subscriber' => 'yes',
 'analytics_tracking_visitor' => 'yes',
 'javascript_enabled' => 'no',
-'optimizer_tracking_id' => 'UA-XXXXXXXX-X');
+'optimizer_tracking_id' => '');
 
 $content_switcher_options = get_option('content_switcher');
 foreach ($content_switcher_default_options as $key => $value) {

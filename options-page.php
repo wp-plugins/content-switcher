@@ -1,31 +1,20 @@
 <?php if (!current_user_can('manage_options')) { wp_die(__('You do not have sufficient permissions to access this page.')); }
 
+$content_switcher_options = get_option('content_switcher');
+
 if ((isset($_POST['submit'])) && (check_admin_referer($_GET['page']))) {
 $_POST = array_map('html_entity_decode', $_POST);
 $_POST = array_map('stripslashes', $_POST);
-if ($_POST['analytics_tracking_admin'] == 'yes') { $analytics_tracking_admin = 'yes'; } else { $analytics_tracking_admin = 'no'; }
-if ($_POST['analytics_tracking_author'] == 'yes') { $analytics_tracking_author = 'yes'; } else { $analytics_tracking_author = 'no'; }
-if ($_POST['analytics_tracking_contributor'] == 'yes') { $analytics_tracking_contributor = 'yes'; } else { $analytics_tracking_contributor = 'no'; }
-if ($_POST['analytics_tracking_editor'] == 'yes') { $analytics_tracking_editor = 'yes'; } else { $analytics_tracking_editor = 'no'; }
-$analytics_tracking_id = mysql_real_escape_string($_POST['analytics_tracking_id']);
-if ($_POST['analytics_tracking_subscriber'] == 'yes') { $analytics_tracking_subscriber = 'yes'; } else { $analytics_tracking_subscriber = 'no'; }
-if ($_POST['analytics_tracking_visitor'] == 'yes') { $analytics_tracking_visitor = 'yes'; } else { $analytics_tracking_visitor = 'no'; }
-if ($_POST['javascript_enabled'] == 'yes') { $javascript_enabled = 'yes'; } else { $javascript_enabled = 'no'; }
-$optimizer_tracking_id = mysql_real_escape_string($_POST['optimizer_tracking_id']);
-
-$content_switcher_options = array(
-'analytics_tracking_admin' => $analytics_tracking_admin,
-'analytics_tracking_author' => $analytics_tracking_author,
-'analytics_tracking_contributor' => $analytics_tracking_contributor,
-'analytics_tracking_editor' => $analytics_tracking_editor,
-'analytics_tracking_id' => $analytics_tracking_id,
-'analytics_tracking_subscriber' => $analytics_tracking_subscriber,
-'analytics_tracking_visitor' => $analytics_tracking_visitor,
-'javascript_enabled' => $javascript_enabled,
-'optimizer_tracking_id' => $optimizer_tracking_id);
+if ($_POST['analytics_tracking_admin'] != 'yes') { $_POST['analytics_tracking_admin'] = 'no'; }
+if ($_POST['analytics_tracking_author'] != 'yes') { $_POST['analytics_tracking_author'] = 'no'; }
+if ($_POST['analytics_tracking_contributor'] != 'yes') { $_POST['analytics_tracking_contributor'] = 'no'; }
+if ($_POST['analytics_tracking_editor'] != 'yes') { $_POST['analytics_tracking_editor'] = 'no'; }
+if ($_POST['analytics_tracking_subscriber'] != 'yes') { $_POST['analytics_tracking_subscriber'] = 'no'; }
+if ($_POST['analytics_tracking_visitor'] != 'yes') { $_POST['analytics_tracking_visitor'] = 'no'; }
+if ($_POST['javascript_enabled'] != 'yes') { $_POST['javascript_enabled'] = 'no'; }
+foreach ($content_switcher_options as $key => $value) { $content_switcher_options[$key] = $_POST[$key]; }
 update_option('content_switcher', $content_switcher_options); }
 
-if (!isset($content_switcher_options)) { $content_switcher_options = get_option('content_switcher'); }
 $content_switcher_options = array_map('htmlspecialchars', $content_switcher_options); ?>
 
 <div class="wrap">
