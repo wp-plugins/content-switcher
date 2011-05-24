@@ -1,10 +1,9 @@
 <?php if (!current_user_can('manage_options')) { wp_die(__('You do not have sufficient permissions to access this page.')); }
 
-$content_switcher_options = get_option('content_switcher');
-
 if ((isset($_POST['submit'])) && (check_admin_referer($_GET['page']))) {
 $_POST = array_map('html_entity_decode', $_POST);
 $_POST = array_map('stripslashes', $_POST);
+include_once 'initial-options.php';
 if ($_POST['analytics_tracking_admin'] != 'yes') { $_POST['analytics_tracking_admin'] = 'no'; }
 if ($_POST['analytics_tracking_author'] != 'yes') { $_POST['analytics_tracking_author'] = 'no'; }
 if ($_POST['analytics_tracking_contributor'] != 'yes') { $_POST['analytics_tracking_contributor'] = 'no'; }
@@ -12,8 +11,11 @@ if ($_POST['analytics_tracking_editor'] != 'yes') { $_POST['analytics_tracking_e
 if ($_POST['analytics_tracking_subscriber'] != 'yes') { $_POST['analytics_tracking_subscriber'] = 'no'; }
 if ($_POST['analytics_tracking_visitor'] != 'yes') { $_POST['analytics_tracking_visitor'] = 'no'; }
 if ($_POST['javascript_enabled'] != 'yes') { $_POST['javascript_enabled'] = 'no'; }
-foreach ($content_switcher_options as $key => $value) { $content_switcher_options[$key] = $_POST[$key]; }
+foreach ($content_switcher_initial_options as $key => $value) {
+if ($_POST[$key] != '') { $content_switcher_options[$key] = $_POST[$key]; }
+else { $content_switcher_options[$key] = $content_switcher_initial_options[$key]; } }
 update_option('content_switcher', $content_switcher_options); }
+else { $content_switcher_options = (array) get_option('content_switcher'); }
 
 $content_switcher_options = array_map('htmlspecialchars', $content_switcher_options); ?>
 

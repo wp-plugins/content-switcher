@@ -1,0 +1,10 @@
+<?php $content_switcher_initial_options = array(
+'analytics_tracking_admin' => 'no',
+'analytics_tracking_author' => 'yes',
+'analytics_tracking_contributor' => 'yes',
+'analytics_tracking_editor' => 'yes',
+'analytics_tracking_id' => '',
+'analytics_tracking_subscriber' => 'yes',
+'analytics_tracking_visitor' => 'yes',
+'javascript_enabled' => 'no',
+'optimizer_tracking_id' => '');
