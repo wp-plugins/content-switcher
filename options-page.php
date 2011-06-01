@@ -1,6 +1,4 @@
-<?php if (!current_user_can('manage_options')) { wp_die(__('You do not have sufficient permissions to access this page.')); }
-
-if ((isset($_POST['submit'])) && (check_admin_referer($_GET['page']))) {
+<?php if ((isset($_POST['submit'])) && (check_admin_referer($_GET['page']))) {
 include_once 'initial-options.php';
 $_POST = array_map('html_entity_decode', $_POST);
 $_POST = array_map('stripslashes', $_POST);
