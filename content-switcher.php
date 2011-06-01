@@ -3,7 +3,7 @@
 Plugin Name: Content Switcher
 Plugin URI: http://www.kleor-editions.com/content-switcher
 Description: Allows you to easily display a random number, a random or variable content on your website, and to optimize your website with Google Optimizer and Google Analytics.
-Version: 1.7.6
+Version: 1.7.7
 Author: Kleor
 Author URI: http://www.kleor-editions.com
 Text Domain: content-switcher
@@ -40,12 +40,12 @@ if (is_admin()) { include_once dirname(__FILE__).'/admin.php'; }
 
 function analytics_tracking_js() {
 global $content_switcher_options;
-if (current_user_can('activate_plugins')) { if ($content_switcher_options['analytics_tracking_admin'] == 'yes') { $analytics_tracking = true; } }
-elseif (current_user_can('moderate_comments')) { if ($content_switcher_options['analytics_tracking_editor'] == 'yes') { $analytics_tracking = true; } }
-elseif (current_user_can('publish_posts')) { if ($content_switcher_options['analytics_tracking_author'] == 'yes') { $analytics_tracking = true; } }
-elseif (current_user_can('edit_posts')) { if ($content_switcher_options['analytics_tracking_contributor'] == 'yes') { $analytics_tracking = true; } }
-elseif (current_user_can('read')) { if ($content_switcher_options['analytics_tracking_subscriber'] == 'yes') { $analytics_tracking = true; } }
-else { if ($content_switcher_options['analytics_tracking_visitor'] == 'yes') { $analytics_tracking = true; } }
+if (current_user_can('activate_plugins')) { if ($content_switcher_options['admin_tracked'] == 'yes') { $analytics_tracking = true; } }
+elseif (current_user_can('moderate_comments')) { if ($content_switcher_options['editor_tracked'] == 'yes') { $analytics_tracking = true; } }
+elseif (current_user_can('publish_posts')) { if ($content_switcher_options['author_tracked'] == 'yes') { $analytics_tracking = true; } }
+elseif (current_user_can('edit_posts')) { if ($content_switcher_options['contributor_tracked'] == 'yes') { $analytics_tracking = true; } }
+elseif (current_user_can('read')) { if ($content_switcher_options['subscriber_tracked'] == 'yes') { $analytics_tracking = true; } }
+else { if ($content_switcher_options['visitor_tracked'] == 'yes') { $analytics_tracking = true; } }
 if ($analytics_tracking) { ?>
 <script type="text/javascript">
 var _gaq = _gaq || [];
