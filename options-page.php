@@ -1,5 +1,5 @@
 <?php if ((isset($_POST['submit'])) && (check_admin_referer($_GET['page']))) {
-include_once 'initial-options.php';
+include 'initial-options.php';
 $_POST = array_map('html_entity_decode', $_POST);
 $_POST = array_map('stripslashes', $_POST);
 if ($_POST['admin_tracked'] != 'yes') { $_POST['admin_tracked'] = 'no'; }
@@ -11,7 +11,7 @@ if ($_POST['subscriber_tracked'] != 'yes') { $_POST['subscriber_tracked'] = 'no'
 if ($_POST['visitor_tracked'] != 'yes') { $_POST['visitor_tracked'] = 'no'; }
 foreach ($initial_options as $key => $value) {
 if ($_POST[$key] != '') { $options[$key] = $_POST[$key]; }
-else { $options[$key] = $initial_options[$key]; } }
+else { $options[$key] = $value; } }
 update_option('content_switcher', $options); }
 else { $options = (array) get_option('content_switcher'); }
 
