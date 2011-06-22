@@ -1,0 +1,10 @@
+<?php $initial_options = array(
+'admin_tracked' => 'no',
+'analytics_tracking_id' => '',
+'author_tracked' => 'yes',
+'contributor_tracked' => 'yes',
+'editor_tracked' => 'yes',
+'javascript_enabled' => 'no',
+'optimizer_tracking_id' => '',
+'subscriber_tracked' => 'yes',
+'visitor_tracked' => 'yes');
