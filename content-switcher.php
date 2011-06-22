@@ -3,7 +3,7 @@
 Plugin Name: Content Switcher
 Plugin URI: http://www.kleor-editions.com/content-switcher
 Description: Allows you to easily display a random number, a random or variable content on your website, and to optimize your website with Google Optimizer and Google Analytics.
-Version: 1.8
+Version: 1.8.1
 Author: Kleor
 Author URI: http://www.kleor-editions.com
 Text Domain: content-switcher
@@ -62,23 +62,39 @@ global $content_switcher_options;
 if (is_string($atts)) { $field = $atts; $default = ''; $filter = ''; }
 else { $field = $atts[0]; $default = $atts['default']; $filter = $atts['filter']; }
 $field = str_replace('-', '_', content_switcher_format_nice_name($field));
-$filter = str_replace('-', '_', content_switcher_format_nice_name($filter));
 if ($field == '') { $field = 'javascript_enabled'; }
 $data = $content_switcher_options[$field];
-$data = do_shortcode($data);
+$data = (string) do_shortcode($data);
 if ($data == '') { $data = $default; }
-switch ($filter) {
-case 'htmlentities': $data = htmlentities($data); break;
-case 'htmlspecialchars': $data = htmlspecialchars($data); break; }
+$data = content_switcher_filter_data($filter, $data);
 return $data; }
 
 add_shortcode('content-switcher', 'content_switcher_data');
 
 
+function content_switcher_filter_data($filter, $data) {
+if (is_string($filter)) { $filter = preg_split('#[^a-zA-Z0-9_]#', str_replace('-', '_', $filter)); }
+if (is_array($filter)) { foreach ($filter as $function) { $data = content_switcher_string_map($function, $data); } }
+return $data; }
+
+
 function content_switcher_format_nice_name($string) {
 $string = content_switcher_strip_accents(strtolower(trim(strip_tags($string))));
-$string = str_replace(' ', '_', $string);
+$string = str_replace(' ', '-', $string);
 $string = preg_replace('/[^a-zA-Z0-9_-]/', '', $string);
+return $string; }
+
+
+function content_switcher_i18n($string) {
+$strings = array(
+__('no', 'content-switcher'),
+__('yes', 'content-switcher'));
+return __(__($string), 'content-switcher'); }
+
+
+function content_switcher_string_map($function, $string) {
+if (!function_exists($function)) { $function = 'content_switcher_'.$function; }
+if (function_exists($function)) { $array = array_map($function, array($string)); $string = $array[0]; }
 return $string; }
 
 
@@ -150,7 +166,7 @@ if (content_switcher_data('javascript_enabled') == 'yes') { add_action('wp_foote
 
 
 function random_content($atts, $content) {
-extract(shortcode_atts(array('string' => ''), $atts));
+extract(shortcode_atts(array('filter' => '', 'string' => ''), $atts));
 
 if ($string != '') {
 $string = str_replace('(', '[', $string);
@@ -162,6 +178,7 @@ $m = count($content) - 1;
 $n = mt_rand(0, $m);
 $content[$n] = str_replace('[string]', $string, $content[$n]);
 
+$content[$n] = content_switcher_filter_data($filter, $content[$n]);
 return $content[$n]; }
 
 add_shortcode('random-content', 'random_content');
@@ -179,7 +196,7 @@ add_shortcode('random-content10', 'random_content');
 
 
 function random_number($atts) {
-extract(shortcode_atts(array(set => '', 'min' => 0, 'max' => 0, 'digits' => 0), $atts));
+extract(shortcode_atts(array('digits' => 0, 'filter' => '', 'max' => 0, 'min' => 0, 'set' => ''), $atts));
 
 if ($set == '') {
 $min = floor($min); $max = floor($max);
@@ -193,13 +210,14 @@ $digits = floor($digits);
 while ($length < $digits) { $number = '0'.$number; $length = $length + 1; }
 $number = $symbol.$number;
 
+$number = content_switcher_filter_data($filter, $number);
 return $number; }
 
 add_shortcode('random-number', 'random_number');
 
 
 function variable_content($atts, $content) {
-extract(shortcode_atts(array('name' => 'content', 'string' => '', 'type' => 'get', 'values' => ''), $atts));
+extract(shortcode_atts(array('filter' => '', 'name' => 'content', 'string' => '', 'type' => 'get', 'values' => ''), $atts));
 
 if ($string != '') {
 $string = str_replace('(', '[', $string);
@@ -223,15 +241,15 @@ if (isset($TYPE[$name])) {
 		if ($values == '') { $n = (floor($TYPE[$name]))%$m; }
 		else {
 		$values = explode('/', $values);
-		$v = count($values) - 1;
-		for ($i = 0; $i <= $v; $i++) { { if ($TYPE[$name] == $values[$i]) { $n = $i; } } }
+		$v = count($values); $n = 0;
+		for ($i = 0; $i < $v; $i++) { if ($TYPE[$name] == $values[$i]) { $n = $i; } }
 		}
 	}
 }	
 else { $n = 0; }
 
 $content[$n] = str_replace('[string]', $string, $content[$n]);
-
+$content[$n] = content_switcher_filter_data($filter, $content[$n]);
 return $content[$n]; }
 
 add_shortcode('variable-content', 'variable_content');
@@ -249,7 +267,7 @@ add_shortcode('variable-content10', 'variable_content');
 
 
 function variable_string($atts) {
-extract(shortcode_atts(array('name' => 'content', 'type' => 'get'), $atts));
+extract(shortcode_atts(array('default' => '', 'filter' => '', 'name' => 'content', 'type' => 'get'), $atts));
 
 $type = strtolower($type); switch ($type) {
 case 'cookie': $TYPE = $_COOKIE; break;
@@ -260,7 +278,8 @@ case 'session': $TYPE = $_SESSION; break;
 default: $TYPE = $_GET; }
 
 if (isset($TYPE[$name])) { $string = utf8_encode(htmlspecialchars($TYPE[$name])); }
-
+if ($string == '') { $string = $default; }
+$string = content_switcher_filter_data($filter, $string);
 return $string; }
 
 add_shortcode('variable-string', 'variable_string');

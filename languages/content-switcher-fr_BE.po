@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Content Switcher 1.7.3\n"
+"Project-Id-Version: Content Switcher 1.8.1\n"
 "Report-Msgid-Bugs-To: http://www.kleor-editions.com/content-switcher\n"
 "POT-Creation-Date: 2010-01-07 17:45+0000\n"
-"PO-Revision-Date: 2011-04-21 02:40+0100\n"
+"PO-Revision-Date: 2011-06-21 19:07+0100\n"
 "Last-Translator: Kleor\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -59,11 +59,32 @@ msgstr "Ajouter le code JavaScript"
 msgid "If you uncheck this box, Content Switcher will never add any JavaScript code to the pages of your website, but Google Analytics and Google Optimizer will not work."
 msgstr "Si vous décochez cette case, Content Switcher n'ajoutera jamais de code JavaScript aux pages de votre site Web, mais Google Analytics et Google Optimizer ne fonctionneront pas."
 
+msgid "Uninstall"
+msgstr "Désinstaller"
+
+msgid "Options deleted."
+msgstr "Options supprimées."
+
+msgid "Do you really want to permanently delete the options of Content Switcher?"
+msgstr "Souhaitez-vous vraiment supprimer définitivement les options de Content Switcher?"
+
+msgid "yes"
+msgstr "oui"
+
+msgid "no"
+msgstr "non"
+
+msgid "Yes"
+msgstr "Oui"
+
+msgid "No"
+msgstr "Non"
+
 #~ msgid "content-switcher/en"
 #~ msgstr "content-switcher"
 
 #~ msgid "/en/"
-#~ msgstr "/"
+#~ msgstr "/fr/"
 
 #~ msgid ""
 #~ "<a href=\"http://www.kleor-editions.com/content-switcher/en"
