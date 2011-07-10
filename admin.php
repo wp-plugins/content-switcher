@@ -29,7 +29,7 @@ function install_content_switcher() {
 include 'initial-options.php';
 $options = get_option('content_switcher');
 foreach ($initial_options as $key => $value) {
-if ($options[$key] == '') { $options[$key] = $value; } }
+if (($key == 'version') || ($options[$key] == '')) { $options[$key] = $value; } }
 update_option('content_switcher', $options); }
 
 register_activation_hook('content-switcher/content-switcher.php', 'install_content_switcher');

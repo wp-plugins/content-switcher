@@ -7,4 +7,5 @@
 'javascript_enabled' => 'no',
 'optimizer_tracking_id' => '',
 'subscriber_tracked' => 'yes',
+'version' => CONTENT_SWITCHER_VERSION,
 'visitor_tracked' => 'yes');
