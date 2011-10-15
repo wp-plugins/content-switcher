@@ -18,13 +18,14 @@ if ((isset($_POST['submit'])) && (check_admin_referer($_GET['page']))) {
 include 'initial-options.php';
 $_POST = array_map('html_entity_decode', $_POST);
 $_POST = array_map('stripslashes', $_POST);
-if ($_POST['admin_tracked'] != 'yes') { $_POST['admin_tracked'] = 'no'; }
-if ($_POST['author_tracked'] != 'yes') { $_POST['author_tracked'] = 'no'; }
-if ($_POST['contributor_tracked'] != 'yes') { $_POST['contributor_tracked'] = 'no'; }
-if ($_POST['editor_tracked'] != 'yes') { $_POST['editor_tracked'] = 'no'; }
-if ($_POST['javascript_enabled'] != 'yes') { $_POST['javascript_enabled'] = 'no'; }
-if ($_POST['subscriber_tracked'] != 'yes') { $_POST['subscriber_tracked'] = 'no'; }
-if ($_POST['visitor_tracked'] != 'yes') { $_POST['visitor_tracked'] = 'no'; }
+foreach (array(
+'admin_tracked',
+'author_tracked',
+'contributor_tracked',
+'editor_tracked',
+'javascript_enabled',
+'subscriber_tracked',
+'visitor_tracked') as $field) { if ($_POST[$field] != 'yes') { $_POST[$field] = 'no'; } }
 foreach ($initial_options as $key => $value) {
 if ($_POST[$key] != '') { $options[$key] = $_POST[$key]; }
 else { $options[$key] = $value; } }
