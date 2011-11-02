@@ -1,0 +1,81 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Content Switcher 1.8.1\n"
+"Report-Msgid-Bugs-To: http://www.kleor-editions.com/content-switcher\n"
+"POT-Creation-Date: 2010-01-07 17:45+0000\n"
+"PO-Revision-Date: 2010-01-07 17:45+0000\n"
+"Last-Translator: Kleor\n"
+"Language-Team: Kleor\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
+
+msgid "Allows you to easily display a random number, a random or variable content on your website, and to optimize your website with Google Optimizer and Google Analytics."
+msgstr ""
+
+msgid "Documentation"
+msgstr ""
+
+msgid "Options"
+msgstr ""
+
+msgid "Google Analytics Account Tracking ID"
+msgstr ""
+
+msgid "Google Optimizer Account Tracking ID"
+msgstr ""
+
+msgid "More informations"
+msgstr ""
+
+msgid "Track with Google Analytics the"
+msgstr ""
+
+msgid "Administrators"
+msgstr ""
+
+msgid "Editors"
+msgstr ""
+
+msgid "Authors"
+msgstr ""
+
+msgid "Contributors"
+msgstr ""
+
+msgid "Subscribers"
+msgstr ""
+
+msgid "Visitors without any role"
+msgstr ""
+
+msgid "you can check several boxes"
+msgstr ""
+
+msgid "Add JavaScript code"
+msgstr ""
+
+msgid "If you uncheck this box, Content Switcher will never add any JavaScript code to the pages of your website, but Google Analytics and Google Optimizer will not work."
+msgstr ""
+
+msgid "Uninstall"
+msgstr ""
+
+msgid "Options deleted."
+msgstr ""
+
+msgid "Do you really want to permanently delete the options of Content Switcher?"
+msgstr ""
+
+msgid "yes"
+msgstr ""
+
+msgid "no"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "No"
+msgstr ""
