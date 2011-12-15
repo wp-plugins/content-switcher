@@ -35,9 +35,12 @@ else { $options = (array) get_option('content_switcher'); }
 $options = array_map('htmlspecialchars', $options); ?>
 
 <div class="wrap">
-<h2>Content Switcher</h2>
+<h2 style="float: left;">Content Switcher</h2>
+<ul class="subsubsub" style="margin: 1.25em 0 1.5em 6em; float: left; white-space: normal;">
+<li><a href="http://www.kleor-editions.com/content-switcher"><?php _e('Documentation', 'content-switcher'); ?></a></li>
+</ul>
+<div class="clear"></div>
 <?php if (isset($_POST['submit'])) { echo '<div class="updated"><p><strong>'.__('Settings saved.').'</strong></p></div>'; } ?>
-<p style="margin: 1.5em"><a href="http://www.kleor-editions.com/content-switcher"><?php _e('Documentation', 'content-switcher'); ?></a></p>
 <h3><?php _e('Options', 'content-switcher'); ?></h3>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>">
 <?php wp_nonce_field($_GET['page']); ?>
