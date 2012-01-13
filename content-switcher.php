@@ -3,7 +3,7 @@
 Plugin Name: Content Switcher
 Plugin URI: http://www.kleor-editions.com/content-switcher
 Description: Allows you to easily display a random number, a random or variable content on your website, and to optimize your website with Google Optimizer and Google Analytics.
-Version: 1.8.5
+Version: 2.0
 Author: Kleor
 Author URI: http://www.kleor-editions.com
 Text Domain: content-switcher
@@ -59,7 +59,9 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 </script>
 <?php } }
 
-if (content_switcher_data('javascript_enabled') == 'yes') { add_action('wp_footer', 'analytics_tracking_js'); }
+if (content_switcher_data('javascript_enabled') == 'yes') {
+if (content_switcher_data('back_office_tracked') == 'yes') { add_action('admin_footer', 'analytics_tracking_js'); }
+if (content_switcher_data('front_office_tracked') == 'yes') { add_action('wp_footer', 'analytics_tracking_js'); } }
 
 
 function content_switcher_data($atts) {
@@ -95,6 +97,14 @@ $strings = array(
 __('no', 'content-switcher'),
 __('yes', 'content-switcher'));
 return __(__($string), 'content-switcher'); }
+
+
+function content_switcher_string($atts) {
+extract(shortcode_atts(array('default' => '', 'filter' => ''), $atts));
+$string = $_GET['content_switcher_string'];
+if ($string == '') { $string = $default; }
+$string = content_switcher_filter_data($filter, $string);
+return $string; }
 
 
 function content_switcher_string_map($function, $string) {
@@ -172,18 +182,19 @@ if (content_switcher_data('javascript_enabled') == 'yes') { add_action('wp_foote
 
 function random_content($atts, $content) {
 extract(shortcode_atts(array('filter' => '', 'string' => ''), $atts));
-
 if ($string != '') {
 $string = str_replace('(', '[', $string);
 $string = str_replace(')', ']', $string);
 $string = do_shortcode($string); }
-
+if (isset($_GET['content_switcher_string'])) { $original_content_switcher_string = $_GET['content_switcher_string']; }
+$_GET['content_switcher_string'] = $string;
 $content = explode('[other]', do_shortcode($content));
 $m = count($content) - 1;
 $n = mt_rand(0, $m);
-$content[$n] = str_replace('[string]', $string, $content[$n]);
-
-$content[$n] = content_switcher_filter_data($filter, $content[$n]);
+add_shortcode('string', 'content_switcher_string');
+$content[$n] = content_switcher_filter_data($filter, do_shortcode($content[$n]));
+if (isset($original_content_switcher_string)) { $_GET['content_switcher_string'] = $original_content_switcher_string; }
+remove_shortcode('string');
 return $content[$n]; }
 
 add_shortcode('random-content', 'random_content');
@@ -223,12 +234,12 @@ add_shortcode('random-number', 'random_number');
 
 function variable_content($atts, $content) {
 extract(shortcode_atts(array('filter' => '', 'name' => 'content', 'string' => '', 'type' => 'get', 'values' => ''), $atts));
-
 if ($string != '') {
 $string = str_replace('(', '[', $string);
 $string = str_replace(')', ']', $string);
 $string = do_shortcode($string); }
-
+if (isset($_GET['content_switcher_string'])) { $original_content_switcher_string = $_GET['content_switcher_string']; }
+$_GET['content_switcher_string'] = $string;
 $content = explode('[other]', do_shortcode($content));
 $m = count($content);
 
@@ -253,8 +264,10 @@ if (isset($TYPE[$name])) {
 }	
 else { $n = 0; }
 
-$content[$n] = str_replace('[string]', $string, $content[$n]);
-$content[$n] = content_switcher_filter_data($filter, $content[$n]);
+add_shortcode('string', 'content_switcher_string');
+$content[$n] = content_switcher_filter_data($filter, do_shortcode($content[$n]));
+if (isset($original_content_switcher_string)) { $_GET['content_switcher_string'] = $original_content_switcher_string; }
+remove_shortcode('string');
 return $content[$n]; }
 
 add_shortcode('variable-content', 'variable_content');
