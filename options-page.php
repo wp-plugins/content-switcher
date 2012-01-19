@@ -61,14 +61,12 @@ echo '<label>'.$value.': <input type="text" name="'.$key.'_tracking_id" id="'.$k
 'visitor' => __('Visitors without any role', 'content-switcher')) as $key => $value) {
 echo '<label><input type="checkbox" name="'.$key.'_tracked" id="'.$key.'_tracked" value="yes"'.($options[$key.'_tracked'] == 'yes' ? ' checked="checked"' : '').' /> '.$value.'<br /></label>'; } ?>
 <span class="description">(<?php _e('you can check several boxes', 'content-switcher'); ?>)</span></p>
-
 <p><?php _e('Track with Google Analytics the', 'content-switcher'); ?>:</p>
 <p style="margin: 1.5em;"><?php foreach (array(
 'front_office' => __('Front office pages', 'content-switcher'),
 'back_office' => __('Back office pages', 'content-switcher')) as $key => $value) {
 echo '<label><input type="checkbox" name="'.$key.'_tracked" id="'.$key.'_tracked" value="yes"'.($options[$key.'_tracked'] == 'yes' ? ' checked="checked"' : '').' /> '.$value.'<br /></label>'; } ?>
 <span class="description">(<?php _e('you can check several boxes', 'content-switcher'); ?>)</span></p>
-
 <p><label><input type="checkbox" name="javascript_enabled" id="javascript_enabled" value="yes"<?php if ($options['javascript_enabled'] == 'yes') { echo ' checked="checked"'; } ?> /> <?php _e('Add JavaScript code', 'content-switcher'); ?><br /></label>
 <span class="description"><?php _e('If you uncheck this box, Content Switcher will never add any JavaScript code to the pages of your website, but Google Analytics and Google Optimizer will not work.', 'content-switcher'); ?></span></p>
 <p class="submit" style="margin: 0 20%;"><input type="submit" class="button-primary" name="submit" id="submit" value="<?php _e('Save Changes'); ?>" /></p>

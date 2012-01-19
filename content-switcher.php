@@ -3,7 +3,7 @@
 Plugin Name: Content Switcher
 Plugin URI: http://www.kleor-editions.com/content-switcher
 Description: Allows you to easily display a random number, a random or variable content on your website, and to optimize your website with Google Optimizer and Google Analytics.
-Version: 2.0
+Version: 2.0.1
 Author: Kleor
 Author URI: http://www.kleor-editions.com
 Text Domain: content-switcher
@@ -198,17 +198,7 @@ remove_shortcode('string');
 return $content[$n]; }
 
 add_shortcode('random-content', 'random_content');
-add_shortcode('random-content0', 'random_content');
-add_shortcode('random-content1', 'random_content');
-add_shortcode('random-content2', 'random_content');
-add_shortcode('random-content3', 'random_content');
-add_shortcode('random-content4', 'random_content');
-add_shortcode('random-content5', 'random_content');
-add_shortcode('random-content6', 'random_content');
-add_shortcode('random-content7', 'random_content');
-add_shortcode('random-content8', 'random_content');
-add_shortcode('random-content9', 'random_content');
-add_shortcode('random-content10', 'random_content');
+for ($i = 0; $i < 16; $i++) { add_shortcode('random-content'.$i, 'random_content'); }
 
 
 function random_number($atts) {
@@ -271,17 +261,7 @@ remove_shortcode('string');
 return $content[$n]; }
 
 add_shortcode('variable-content', 'variable_content');
-add_shortcode('variable-content0', 'variable_content');
-add_shortcode('variable-content1', 'variable_content');
-add_shortcode('variable-content2', 'variable_content');
-add_shortcode('variable-content3', 'variable_content');
-add_shortcode('variable-content4', 'variable_content');
-add_shortcode('variable-content5', 'variable_content');
-add_shortcode('variable-content6', 'variable_content');
-add_shortcode('variable-content7', 'variable_content');
-add_shortcode('variable-content8', 'variable_content');
-add_shortcode('variable-content9', 'variable_content');
-add_shortcode('variable-content10', 'variable_content');
+for ($i = 0; $i < 16; $i++) { add_shortcode('variable-content'.$i, 'variable_content'); }
 
 
 function variable_string($atts) {
