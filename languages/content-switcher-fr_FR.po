@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Content Switcher 1.8.1\n"
 "Report-Msgid-Bugs-To: http://www.kleor-editions.com/content-switcher\n"
 "POT-Creation-Date: 2010-01-07 17:45+0000\n"
-"PO-Revision-Date: 2012-01-19 13:11+0100\n"
+"PO-Revision-Date: 2012-02-18 23:00+0100\n"
 "Last-Translator: Jérémy Lebré <contact@kleor-editions.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -66,7 +66,7 @@ msgid "Options deleted."
 msgstr "Options supprimées."
 
 msgid "Do you really want to permanently delete the options of Content Switcher?"
-msgstr "Souhaitez-vous vraiment supprimer définitivement les options de Content Switcher ?"
+msgstr "Souhaitez-vous vraiment supprimer définitivement les options de Content Switcher&nbsp;?"
 
 msgid "yes"
 msgstr "oui"
@@ -85,4 +85,13 @@ msgstr "Pages du front office"
 
 msgid "Back office pages"
 msgstr "Pages du back office"
+
+msgid "Reset"
+msgstr "Réinitialiser"
+
+msgid "Options reset."
+msgstr "Options réinitialisées."
+
+msgid "Do you really want to reset the options of Content Switcher?"
+msgstr "Souhaitez-vous vraiment réinitialiser les options de Content Switcher&nbsp;?"
 

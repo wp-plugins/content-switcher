@@ -6,7 +6,7 @@
 'contributor_tracked' => 'yes',
 'editor_tracked' => 'yes',
 'front_office_tracked' => 'yes',
-'javascript_enabled' => 'no',
+'javascript_enabled' => 'yes',
 'optimizer_tracking_id' => '',
 'subscriber_tracked' => 'yes',
 'version' => CONTENT_SWITCHER_VERSION,

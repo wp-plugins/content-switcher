@@ -1,4 +1,6 @@
-<?php function content_switcher_admin_menu() {
+<?php load_plugin_textdomain('content-switcher', false, 'content-switcher/languages');
+
+function content_switcher_admin_menu() {
 add_options_page('Content Switcher', 'Content Switcher', 'manage_options', 'content-switcher', create_function('', 'include "options-page.php";')); }
 
 add_action('admin_menu', 'content_switcher_admin_menu');
@@ -8,6 +10,7 @@ function content_switcher_action_links($links, $file) {
 if ($file == 'content-switcher/content-switcher.php') {
 return array_merge($links, array(
 '<a href="options-general.php?page=content-switcher&amp;action=uninstall">'.__('Uninstall', 'content-switcher').'</a>',
+'<a href="options-general.php?page=content-switcher&amp;action=reset">'.__('Reset', 'content-switcher').'</a>',
 '<a href="options-general.php?page=content-switcher">'.__('Options', 'content-switcher').'</a>')); }
 return $links; }
 

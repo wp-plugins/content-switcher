@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Content Switcher 2.0.1\n"
+"Project-Id-Version: Content Switcher 2.1\n"
 "Report-Msgid-Bugs-To: http://www.kleor-editions.com/content-switcher\n"
 "POT-Creation-Date: 2010-01-07 17:45+0000\n"
 "PO-Revision-Date: 2010-01-07 17:45+0000\n"
@@ -84,4 +84,13 @@ msgid "Front office pages"
 msgstr ""
 
 msgid "Back office pages"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Options reset."
+msgstr ""
+
+msgid "Do you really want to reset the options of Content Switcher?"
 msgstr ""

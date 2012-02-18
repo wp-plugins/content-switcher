@@ -3,7 +3,7 @@
 Plugin Name: Content Switcher
 Plugin URI: http://www.kleor-editions.com/content-switcher
 Description: Allows you to easily display a random number, a random or variable content on your website, and to optimize your website with Google Optimizer and Google Analytics.
-Version: 2.0.1
+Version: 2.1
 Author: Kleor
 Author URI: http://www.kleor-editions.com
 Text Domain: content-switcher
@@ -24,8 +24,6 @@ merchantability or fitness for a particular purpose. See the
 GNU General Public License for more details.
 */
 
-
-load_plugin_textdomain('content-switcher', false, 'content-switcher/languages');
 
 define('CONTENT_SWITCHER_URL', plugin_dir_url(__FILE__));
 $plugin_data = get_file_data(__FILE__, array('Version' => 'Version'));
@@ -93,18 +91,11 @@ return $string; }
 
 
 function content_switcher_i18n($string) {
+load_plugin_textdomain('content-switcher', false, 'content-switcher/languages');
 $strings = array(
 __('no', 'content-switcher'),
 __('yes', 'content-switcher'));
 return __(__($string), 'content-switcher'); }
-
-
-function content_switcher_string($atts) {
-extract(shortcode_atts(array('default' => '', 'filter' => ''), $atts));
-$string = $_GET['content_switcher_string'];
-if ($string == '') { $string = $default; }
-$string = content_switcher_filter_data($filter, $string);
-return $string; }
 
 
 function content_switcher_string_map($function, $string) {
@@ -118,24 +109,6 @@ return str_replace(
 explode(' ', 'á à â ä ã å ç é è ê ë í ì î ï ñ ó ò ô ö õ ø ú ù û ü ý ÿ Á À Â Ä Ã Å Ç É È Ê Ë Í Ì Î Ï Ñ Ó Ò Ô Ö Õ Ø Ú Ù Û Ü Ý Ÿ'),
 explode(' ', 'a a a a a a c e e e e i i i i n o o o o o o u u u u y y A A A A A A C E E E E I I I I N O O O O O O U U U U Y Y'),
 $string); }
-
-
-function optimizer_content($atts, $content) {
-$content = do_shortcode($content);
-
-if (content_switcher_data('javascript_enabled') == 'yes') {
-global $post;
-$optimizer = do_shortcode(get_post_meta($post->ID, 'optimizer', true));
-if (substr($optimizer, 0, 1) != '/') { $optimizer = '/'.$optimizer; }
-$optimizer = explode('/', $optimizer);
-if ($optimizer[2] == 'test') {
-extract(shortcode_atts(array('name' => 'Content'), $atts));
-$content = '<script type="text/javascript">utmx_section("'.$name.'")</script>'
-.$content.'</noscript>'; } }
-
-return $content; }
-
-add_shortcode('optimizer-content', 'optimizer_content');
 
 
 function optimizer_control_js() {
@@ -180,107 +153,13 @@ gwoTracker._trackPageview("<?php echo $optimizer; ?>");
 if (content_switcher_data('javascript_enabled') == 'yes') { add_action('wp_footer', 'optimizer_tracking_js'); }
 
 
-function random_content($atts, $content) {
-extract(shortcode_atts(array('filter' => '', 'string' => ''), $atts));
-if ($string != '') {
-$string = str_replace('(', '[', $string);
-$string = str_replace(')', ']', $string);
-$string = do_shortcode($string); }
-if (isset($_GET['content_switcher_string'])) { $original_content_switcher_string = $_GET['content_switcher_string']; }
-$_GET['content_switcher_string'] = $string;
-$content = explode('[other]', do_shortcode($content));
-$m = count($content) - 1;
-$n = mt_rand(0, $m);
-add_shortcode('string', 'content_switcher_string');
-$content[$n] = content_switcher_filter_data($filter, do_shortcode($content[$n]));
-if (isset($original_content_switcher_string)) { $_GET['content_switcher_string'] = $original_content_switcher_string; }
-remove_shortcode('string');
-return $content[$n]; }
-
-add_shortcode('random-content', 'random_content');
-for ($i = 0; $i < 16; $i++) { add_shortcode('random-content'.$i, 'random_content'); }
-
-
-function random_number($atts) {
-extract(shortcode_atts(array('digits' => 0, 'filter' => '', 'max' => 0, 'min' => 0, 'set' => ''), $atts));
-
-if ($set == '') {
-$min = floor($min); $max = floor($max);
-if ($min <= $max) { $n = mt_rand($min, $max); } else { $n = mt_rand($max, $min); } }
-else { $set = explode('/', $set); $n = $set[mt_rand(0, count($set) - 1)]; }
-
-if ($n >= 0) { $symbol = ''; } else { $symbol = '-'; $n = -$n; }
-$number = (string) $n;
-$length = strlen($number);
-$digits = floor($digits);
-while ($length < $digits) { $number = '0'.$number; $length = $length + 1; }
-$number = $symbol.$number;
-
-$number = content_switcher_filter_data($filter, $number);
-return $number; }
-
-add_shortcode('random-number', 'random_number');
-
-
-function variable_content($atts, $content) {
-extract(shortcode_atts(array('filter' => '', 'name' => 'content', 'string' => '', 'type' => 'get', 'values' => ''), $atts));
-if ($string != '') {
-$string = str_replace('(', '[', $string);
-$string = str_replace(')', ']', $string);
-$string = do_shortcode($string); }
-if (isset($_GET['content_switcher_string'])) { $original_content_switcher_string = $_GET['content_switcher_string']; }
-$_GET['content_switcher_string'] = $string;
-$content = explode('[other]', do_shortcode($content));
-$m = count($content);
-
-$type = strtolower($type); switch ($type) {
-case 'cookie': $TYPE = $_COOKIE; break;
-case 'env': $TYPE = $_ENV; break;
-case 'post': $TYPE = $_POST; break;
-case 'server': $TYPE = $_SERVER; break;
-case 'session': $TYPE = $_SESSION; break;
-default: $TYPE = $_GET; }
-
-if (isset($TYPE[$name])) {
-	if ($m == 1) { $n = 0; $content[0] = utf8_encode(htmlspecialchars($TYPE[$name])); }
-	else {
-		if ($values == '') { $n = (floor($TYPE[$name]))%$m; }
-		else {
-		$values = explode('/', $values);
-		$v = count($values); $n = 0;
-		for ($i = 0; $i < $v; $i++) { if ($TYPE[$name] == $values[$i]) { $n = $i; } }
-		}
-	}
-}	
-else { $n = 0; }
-
-add_shortcode('string', 'content_switcher_string');
-$content[$n] = content_switcher_filter_data($filter, do_shortcode($content[$n]));
-if (isset($original_content_switcher_string)) { $_GET['content_switcher_string'] = $original_content_switcher_string; }
-remove_shortcode('string');
-return $content[$n]; }
-
-add_shortcode('variable-content', 'variable_content');
-for ($i = 0; $i < 16; $i++) { add_shortcode('variable-content'.$i, 'variable_content'); }
-
-
-function variable_string($atts) {
-extract(shortcode_atts(array('default' => '', 'filter' => '', 'name' => 'content', 'type' => 'get'), $atts));
-
-$type = strtolower($type); switch ($type) {
-case 'cookie': $TYPE = $_COOKIE; break;
-case 'env': $TYPE = $_ENV; break;
-case 'post': $TYPE = $_POST; break;
-case 'server': $TYPE = $_SERVER; break;
-case 'session': $TYPE = $_SESSION; break;
-default: $TYPE = $_GET; }
-
-if (isset($TYPE[$name])) { $string = utf8_encode(htmlspecialchars($TYPE[$name])); }
-if ($string == '') { $string = $default; }
-$string = content_switcher_filter_data($filter, $string);
-return $string; }
-
-add_shortcode('variable-string', 'variable_string');
+add_shortcode('optimizer-content', create_function('$atts, $content', 'include_once "shortcodes.php"; return optimizer_content($atts, $content);'));
+add_shortcode('random-content', create_function('$atts, $content', 'include_once "shortcodes.php"; return random_content($atts, $content);'));
+for ($i = 0; $i < 16; $i++) { add_shortcode('random-content'.$i, create_function('$atts, $content', 'include_once "shortcodes.php"; return random_content($atts, $content);')); }
+add_shortcode('random-number', create_function('$atts', 'include_once "shortcodes.php"; return random_number($atts);'));
+add_shortcode('variable-content', create_function('$atts, $content', 'include_once "shortcodes.php"; return variable_content($atts, $content);'));
+for ($i = 0; $i < 16; $i++) { add_shortcode('variable-content'.$i, create_function('$atts, $content', 'include_once "shortcodes.php"; return variable_content($atts, $content);')); }
+add_shortcode('variable-string', create_function('$atts', 'include_once "shortcodes.php"; return variable_string($atts);'));
 
 
 foreach (array(
