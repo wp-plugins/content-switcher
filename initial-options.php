@@ -1,5 +1,5 @@
 <?php $initial_options = array(
-'admin_tracked' => 'no',
+'administrator_tracked' => 'no',
 'analytics_tracking_id' => '',
 'author_tracked' => 'yes',
 'back_office_tracked' => 'no',

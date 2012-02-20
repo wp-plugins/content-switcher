@@ -34,7 +34,7 @@ include 'initial-options.php';
 $_POST = array_map('html_entity_decode', $_POST);
 $_POST = array_map('stripslashes', $_POST);
 foreach (array(
-'admin_tracked',
+'administrator_tracked',
 'author_tracked',
 'back_office_tracked',
 'contributor_tracked',
@@ -68,7 +68,7 @@ echo '<label>'.$value.': <input type="text" name="'.$key.'_tracking_id" id="'.$k
 <a href="http://www.kleor-editions.com/content-switcher/#tracking-id">'.__('More informations', 'content-switcher').'</a><br />'; } ?></p>
 <p><?php _e('Track with Google Analytics the', 'content-switcher'); ?>:</p>
 <p style="margin: 1.5em;"><?php foreach (array(
-'admin' => __('Administrators', 'content-switcher'),
+'administrator' => __('Administrators', 'content-switcher'),
 'editor' => __('Editors', 'content-switcher'),
 'author' => __('Authors', 'content-switcher'),
 'contributor' => __('Contributors', 'content-switcher'),
