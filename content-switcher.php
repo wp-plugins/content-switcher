@@ -3,7 +3,7 @@
 Plugin Name: Content Switcher
 Plugin URI: http://www.kleor-editions.com/content-switcher
 Description: Allows you to easily display a random number, a random or variable content on your website, and to optimize your website with Google Optimizer and Google Analytics.
-Version: 2.1.1
+Version: 2.1.2
 Author: Kleor
 Author URI: http://www.kleor-editions.com
 Text Domain: content-switcher
@@ -153,13 +153,13 @@ gwoTracker._trackPageview("<?php echo $optimizer; ?>");
 if (content_switcher_data('javascript_enabled') == 'yes') { add_action('wp_footer', 'optimizer_tracking_js'); }
 
 
-add_shortcode('optimizer-content', create_function('$atts, $content', 'include_once "shortcodes.php"; return optimizer_content($atts, $content);'));
-add_shortcode('random-content', create_function('$atts, $content', 'include_once "shortcodes.php"; return random_content($atts, $content);'));
-for ($i = 0; $i < 16; $i++) { add_shortcode('random-content'.$i, create_function('$atts, $content', 'include_once "shortcodes.php"; return random_content($atts, $content);')); }
-add_shortcode('random-number', create_function('$atts', 'include_once "shortcodes.php"; return random_number($atts);'));
-add_shortcode('variable-content', create_function('$atts, $content', 'include_once "shortcodes.php"; return variable_content($atts, $content);'));
-for ($i = 0; $i < 16; $i++) { add_shortcode('variable-content'.$i, create_function('$atts, $content', 'include_once "shortcodes.php"; return variable_content($atts, $content);')); }
-add_shortcode('variable-string', create_function('$atts', 'include_once "shortcodes.php"; return variable_string($atts);'));
+add_shortcode('optimizer-content', create_function('$atts, $content', 'include_once dirname(__FILE__)."/shortcodes.php"; return optimizer_content($atts, $content);'));
+add_shortcode('random-content', create_function('$atts, $content', 'include_once dirname(__FILE__)."/shortcodes.php"; return random_content($atts, $content);'));
+for ($i = 0; $i < 16; $i++) { add_shortcode('random-content'.$i, create_function('$atts, $content', 'include_once dirname(__FILE__)."/shortcodes.php"; return random_content($atts, $content);')); }
+add_shortcode('random-number', create_function('$atts', 'include_once dirname(__FILE__)."/shortcodes.php"; return random_number($atts);'));
+add_shortcode('variable-content', create_function('$atts, $content', 'include_once dirname(__FILE__)."/shortcodes.php"; return variable_content($atts, $content);'));
+for ($i = 0; $i < 16; $i++) { add_shortcode('variable-content'.$i, create_function('$atts, $content', 'include_once dirname(__FILE__)."/shortcodes.php"; return variable_content($atts, $content);')); }
+add_shortcode('variable-string', create_function('$atts', 'include_once dirname(__FILE__)."/shortcodes.php"; return variable_string($atts);'));
 
 
 foreach (array(
