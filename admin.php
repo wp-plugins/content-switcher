@@ -1,10 +1,11 @@
 <?php if ((strstr($_GET['page'], 'content-switcher')) || (strstr($_SERVER['REQUEST_URI'], '/plugins.php'))) {
 load_plugin_textdomain('content-switcher', false, 'content-switcher/languages'); }
 
-function content_switcher_admin_menu() {
+
+function content_switcher_options_page() {
 add_options_page('Content Switcher', 'Content Switcher', 'manage_options', 'content-switcher', create_function('', 'include "options-page.php";')); }
 
-add_action('admin_menu', 'content_switcher_admin_menu');
+add_action('admin_menu', 'content_switcher_options_page');
 
 
 function content_switcher_action_links($links, $file) {

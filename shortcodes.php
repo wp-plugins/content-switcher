@@ -8,7 +8,6 @@ return $string; }
 
 function optimizer_content($atts, $content) {
 $content = do_shortcode($content);
-
 if (content_switcher_data('javascript_enabled') == 'yes') {
 global $post;
 $optimizer = do_shortcode(get_post_meta($post->ID, 'optimizer', true));
@@ -18,7 +17,6 @@ if ($optimizer[2] == 'test') {
 extract(shortcode_atts(array('name' => 'Content'), $atts));
 $content = '<script type="text/javascript">utmx_section("'.$name.'")</script>'
 .$content.'</noscript>'; } }
-
 return $content; }
 
 
@@ -42,19 +40,16 @@ return $content[$n]; }
 
 function random_number($atts) {
 extract(shortcode_atts(array('digits' => 0, 'filter' => '', 'max' => 0, 'min' => 0, 'set' => ''), $atts));
-
 if ($set == '') {
 $min = floor($min); $max = floor($max);
 if ($min <= $max) { $n = mt_rand($min, $max); } else { $n = mt_rand($max, $min); } }
 else { $set = explode('/', $set); $n = $set[mt_rand(0, count($set) - 1)]; }
-
 if ($n >= 0) { $symbol = ''; } else { $symbol = '-'; $n = -$n; }
 $number = (string) $n;
 $length = strlen($number);
 $digits = floor($digits);
 while ($length < $digits) { $number = '0'.$number; $length = $length + 1; }
 $number = $symbol.$number;
-
 $number = content_switcher_filter_data($filter, $number);
 return $number; }
 

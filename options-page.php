@@ -2,7 +2,9 @@
 if ((isset($_POST['submit'])) && (check_admin_referer($_GET['page']))) { delete_option('content_switcher'); } ?>
 <div class="wrap">
 <h2>Content Switcher</h2>
-<?php if (isset($_POST['submit'])) { echo '<div class="updated"><p><strong>'.__('Options deleted.', 'content-switcher').'</strong></p></div>'; } ?>
+<?php if (isset($_POST['submit'])) {
+echo '<div class="updated"><p><strong>'.__('Options deleted.', 'content-switcher').'</strong></p></div>
+<script type="text/javascript">setTimeout(\'window.location = "plugins.php"\', 3000);</script>'; } ?>
 <?php if (!isset($_POST['submit'])) { ?>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>">
 <?php wp_nonce_field($_GET['page']); ?>
@@ -17,7 +19,9 @@ elseif ($_GET['action'] == 'reset') {
 if ((isset($_POST['submit'])) && (check_admin_referer($_GET['page']))) { reset_content_switcher(); } ?>
 <div class="wrap">
 <h2>Content Switcher</h2>
-<?php if (isset($_POST['submit'])) { echo '<div class="updated"><p><strong>'.__('Options reset.', 'content-switcher').'</strong></p></div>'; } ?>
+<?php if (isset($_POST['submit'])) {
+echo '<div class="updated"><p><strong>'.__('Options reset.', 'content-switcher').'</strong></p></div>
+<script type="text/javascript">setTimeout(\'window.location = "options-general.php?page=content-switcher"\', 3000);</script>'; } ?>
 <?php if (!isset($_POST['submit'])) { ?>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>">
 <?php wp_nonce_field($_GET['page']); ?>
