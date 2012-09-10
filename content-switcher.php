@@ -38,6 +38,7 @@ install_content_switcher(); }
 
 
 function analytics_tracking_js() {
+$analytics_tracking = false;
 if (current_user_can('manage_options')) { if (content_switcher_data('administrator_tracked') == 'yes') { $analytics_tracking = true; } }
 elseif (current_user_can('moderate_comments')) { if (content_switcher_data('editor_tracked') == 'yes') { $analytics_tracking = true; } }
 elseif (current_user_can('publish_posts')) { if (content_switcher_data('author_tracked') == 'yes') { $analytics_tracking = true; } }
@@ -65,10 +66,13 @@ if (content_switcher_data('front_office_tracked') == 'yes') { add_action('wp_foo
 function content_switcher_data($atts) {
 global $content_switcher_options;
 if (is_string($atts)) { $field = $atts; $default = ''; $filter = ''; }
-else { $field = $atts[0]; $default = $atts['default']; $filter = $atts['filter']; }
+else {
+$field = (isset($atts[0]) ? $atts[0] : '');
+$default = (isset($atts['default']) ? $atts['default'] : '');
+$filter = (isset($atts['filter']) ? $atts['filter'] : ''); }
 $field = str_replace('-', '_', content_switcher_format_nice_name($field));
 if ($field == '') { $field = 'version'; }
-$data = $content_switcher_options[$field];
+$data = (isset($content_switcher_options[$field]) ? $content_switcher_options[$field] : '');
 $data = (string) do_shortcode($data);
 if ($data == '') { $data = $default; }
 $data = content_switcher_filter_data($filter, $data);
@@ -90,9 +94,6 @@ return $string; }
 
 function content_switcher_i18n($string) {
 load_plugin_textdomain('content-switcher', false, 'content-switcher/languages');
-$strings = array(
-__('no', 'content-switcher'),
-__('yes', 'content-switcher'));
 return __(__($string), 'content-switcher'); }
 
 
@@ -111,10 +112,11 @@ $string); }
 
 function optimizer_control_js() {
 global $post;
+if (isset($post)) {
 $optimizer = do_shortcode(get_post_meta($post->ID, 'optimizer', true));
 if (substr($optimizer, 0, 1) != '/') { $optimizer = '/'.$optimizer; }
 $optimizer = explode('/', $optimizer);
-if ($optimizer[2] == 'test') { ?>
+if ((isset($optimizer[2])) && ($optimizer[2] == 'test')) { ?>
 <script type="text/javascript">
 function utmx_section(){}function utmx(){}
 (function(){var k='<?php echo $optimizer[1]; ?>',d=document,l=d.location,c=d.cookie;function f(n){
@@ -126,13 +128,14 @@ d.write('<sc'+'ript src="'+
 +new Date().valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 '" type="text/javascript" charset="utf-8"></sc'+'ript>')})();
 </script>
-<?php } }
+<?php } } }
 
 if (content_switcher_data('javascript_enabled') == 'yes') { add_action('wp_head', 'optimizer_control_js'); }
 
 
 function optimizer_tracking_js() {
 global $post;
+if (isset($post)) {
 $optimizer = do_shortcode(get_post_meta($post->ID, 'optimizer', true));
 if (substr($optimizer, 0, 1) != '/') { $optimizer = '/'.$optimizer; }
 $type = substr($optimizer, -4);
@@ -146,12 +149,12 @@ var gwoTracker=_gat._getTracker("<?php echo content_switcher_data('optimizer_tra
 gwoTracker._trackPageview("<?php echo $optimizer; ?>");
 }catch(err){}
 </script>
-<?php } }
+<?php } } }
 
 if (content_switcher_data('javascript_enabled') == 'yes') { add_action('wp_footer', 'optimizer_tracking_js'); }
 
 
-for ($i = 0; $i < 16; $i++) {
+for ($i = 0; $i < 4; $i++) {
 foreach (array('random', 'variable') as $string) {
 add_shortcode($string.'-content'.($i == 0 ? '' : $i), create_function('$atts, $content', 'include_once dirname(__FILE__)."/shortcodes.php"; return '.$string.'_content($atts, $content);')); } }
 add_shortcode('optimizer-content', create_function('$atts, $content', 'include_once dirname(__FILE__)."/shortcodes.php"; return optimizer_content($atts, $content);'));

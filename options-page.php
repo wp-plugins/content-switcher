@@ -1,4 +1,4 @@
-<?php if (($_GET['action'] == 'reset') || ($_GET['action'] == 'uninstall')) {
+<?php if ((isset($_GET['action'])) && (($_GET['action'] == 'reset') || ($_GET['action'] == 'uninstall'))) {
 if ((isset($_POST['submit'])) && (check_admin_referer($_GET['page']))) {
 if ($_GET['action'] == 'reset') { reset_content_switcher(); } else { delete_option('content_switcher'); } } ?>
 <div class="wrap">
@@ -20,9 +20,8 @@ else { _e('Do you really want to permanently delete the options of Content Switc
 else {
 if ((isset($_POST['submit'])) && (check_admin_referer($_GET['page']))) {
 include 'initial-options.php';
-foreach (array(
-'html_entity_decode',
-'stripslashes') as $function) { $_POST = array_map($function, $_POST); }
+foreach ($_POST as $key => $value) {
+if (is_string($value)) { $_POST[$key] = stripslashes(html_entity_decode(str_replace('&nbsp;', ' ', $value))); } }
 foreach (array(
 'administrator_tracked',
 'author_tracked',
@@ -32,14 +31,15 @@ foreach (array(
 'front_office_tracked',
 'javascript_enabled',
 'subscriber_tracked',
-'visitor_tracked') as $field) { if ($_POST[$field] != 'yes') { $_POST[$field] = 'no'; } }
+'visitor_tracked') as $field) { if (!isset($_POST[$field])) { $_POST[$field] = 'no'; } }
 foreach ($initial_options as $key => $value) {
-if ($_POST[$key] != '') { $options[$key] = $_POST[$key]; }
+if ((isset($_POST[$key])) && ($_POST[$key] != '')) { $options[$key] = $_POST[$key]; }
 else { $options[$key] = $value; } }
 update_option('content_switcher', $options); }
 else { $options = (array) get_option('content_switcher'); }
 
-$options = array_map('htmlspecialchars', $options); ?>
+foreach ($options as $key => $value) {
+if (is_string($value)) { $options[$key] = htmlspecialchars($value); } } ?>
 
 <div class="wrap">
 <h2 style="float: left;">Content Switcher</h2>
