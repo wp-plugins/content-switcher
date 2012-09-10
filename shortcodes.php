@@ -10,22 +10,20 @@ function optimizer_content($atts, $content) {
 $content = do_shortcode($content);
 if (content_switcher_data('javascript_enabled') == 'yes') {
 global $post;
+if (isset($post)) {
 $optimizer = do_shortcode(get_post_meta($post->ID, 'optimizer', true));
 if (substr($optimizer, 0, 1) != '/') { $optimizer = '/'.$optimizer; }
 $optimizer = explode('/', $optimizer);
-if ($optimizer[2] == 'test') {
+if ((isset($optimizer[2])) && ($optimizer[2] == 'test')) {
 extract(shortcode_atts(array('name' => 'Content'), $atts));
 $content = '<script type="text/javascript">utmx_section("'.$name.'")</script>'
 .$content.'</noscript>'; } }
-return $content; }
+return $content; } }
 
 
 function random_content($atts, $content) {
 extract(shortcode_atts(array('filter' => '', 'string' => ''), $atts));
-if ($string != '') {
-$string = str_replace('(', '[', $string);
-$string = str_replace(')', ']', $string);
-$string = do_shortcode($string); }
+if ($string != '') { $string = do_shortcode(str_replace(array('(', ')'), array('[', ']'), $string)); }
 if (isset($_GET['content_switcher_string'])) { $original_content_switcher_string = $_GET['content_switcher_string']; }
 $_GET['content_switcher_string'] = $string;
 $content = explode('[other]', do_shortcode($content));
@@ -56,10 +54,7 @@ return $number; }
 
 function variable_content($atts, $content) {
 extract(shortcode_atts(array('filter' => '', 'name' => 'content', 'string' => '', 'type' => 'get', 'values' => ''), $atts));
-if ($string != '') {
-$string = str_replace('(', '[', $string);
-$string = str_replace(')', ']', $string);
-$string = do_shortcode($string); }
+if ($string != '') { $string = do_shortcode(str_replace(array('(', ')'), array('[', ']'), $string)); }
 if (isset($_GET['content_switcher_string'])) { $original_content_switcher_string = $_GET['content_switcher_string']; }
 $_GET['content_switcher_string'] = $string;
 $content = explode('[other]', do_shortcode($content));
@@ -104,7 +99,8 @@ case 'server': $TYPE = $_SERVER; break;
 case 'session': $TYPE = $_SESSION; break;
 default: $TYPE = $_GET; }
 
-if (isset($TYPE[$name])) { $string = utf8_encode(htmlspecialchars($TYPE[$name])); }
+if (!isset($TYPE[$name])) { $string = ''; }
+else { $string = utf8_encode(htmlspecialchars($TYPE[$name])); }
 if ($string == '') { $string = $default; }
 $string = content_switcher_filter_data($filter, $string);
 return $string; }

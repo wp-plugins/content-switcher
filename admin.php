@@ -1,4 +1,4 @@
-<?php if ((strstr($_GET['page'], 'content-switcher')) || (strstr($_SERVER['REQUEST_URI'], '/plugins.php'))) {
+<?php if ((isset($_GET['page'])) && (strstr($_GET['page'], 'content-switcher')) || (strstr($_SERVER['REQUEST_URI'], '/plugins.php'))) {
 load_plugin_textdomain('content-switcher', false, 'content-switcher/languages'); }
 
 
