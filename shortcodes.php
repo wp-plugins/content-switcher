@@ -10,7 +10,7 @@ function optimizer_content($atts, $content) {
 $content = do_shortcode($content);
 if (content_switcher_data('javascript_enabled') == 'yes') {
 global $post;
-if (isset($post)) {
+if ((isset($post)) && (is_object($post))) {
 $optimizer = do_shortcode(get_post_meta($post->ID, 'optimizer', true));
 if (substr($optimizer, 0, 1) != '/') { $optimizer = '/'.$optimizer; }
 $optimizer = explode('/', $optimizer);

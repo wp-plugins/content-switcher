@@ -1,4 +1,4 @@
-<?php if ((isset($_GET['page'])) && (strstr($_GET['page'], 'content-switcher')) || (strstr($_SERVER['REQUEST_URI'], '/plugins.php'))) {
+<?php if (((isset($_GET['page'])) && (strstr($_GET['page'], 'content-switcher'))) || (strstr($_SERVER['REQUEST_URI'], '/plugins.php'))) {
 load_plugin_textdomain('content-switcher', false, 'content-switcher/languages'); }
 
 
@@ -35,7 +35,7 @@ load_plugin_textdomain('content-switcher', false, 'content-switcher/languages');
 include 'initial-options.php';
 $options = get_option('content_switcher');
 foreach ($initial_options as $key => $value) {
-if (($key == 'version') || ($options[$key] == '')) { $options[$key] = $value; } }
+if (($key == 'version') || (!isset($options[$key])) || ($options[$key] == '')) { $options[$key] = $value; } }
 update_option('content_switcher', $options); }
 
 register_activation_hook('content-switcher/content-switcher.php', 'install_content_switcher');
