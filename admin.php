@@ -33,7 +33,7 @@ add_filter('plugin_row_meta', 'content_switcher_row_meta', 10, 2);
 function install_content_switcher() {
 load_plugin_textdomain('content-switcher', false, 'content-switcher/languages');
 include 'initial-options.php';
-$options = get_option('content_switcher');
+$options = (array) get_option('content_switcher');
 foreach ($initial_options as $key => $value) {
 if (($key == 'version') || (!isset($options[$key])) || ($options[$key] == '')) { $options[$key] = $value; } }
 update_option('content_switcher', $options); }
