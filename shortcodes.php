@@ -1,6 +1,6 @@
 <?php function content_switcher_string($atts) {
 extract(shortcode_atts(array('default' => '', 'filter' => ''), $atts));
-$string = $_GET['content_switcher_string'];
+$string = $GLOBALS['content_switcher_string'];
 if ($string == '') { $string = $default; }
 $string = content_switcher_filter_data($filter, $string);
 return $string; }
@@ -24,14 +24,14 @@ return $content; } }
 function random_content($atts, $content) {
 extract(shortcode_atts(array('filter' => '', 'string' => ''), $atts));
 if ($string != '') { $string = do_shortcode(str_replace(array('(', ')'), array('[', ']'), $string)); }
-if (isset($_GET['content_switcher_string'])) { $original_content_switcher_string = $_GET['content_switcher_string']; }
-$_GET['content_switcher_string'] = $string;
+if (isset($GLOBALS['content_switcher_string'])) { $original_content_switcher_string = $GLOBALS['content_switcher_string']; }
+$GLOBALS['content_switcher_string'] = $string;
 $content = explode('[other]', do_shortcode($content));
 $m = count($content) - 1;
 $n = mt_rand(0, $m);
 add_shortcode('string', 'content_switcher_string');
 $content[$n] = content_switcher_filter_data($filter, do_shortcode($content[$n]));
-if (isset($original_content_switcher_string)) { $_GET['content_switcher_string'] = $original_content_switcher_string; }
+if (isset($original_content_switcher_string)) { $GLOBALS['content_switcher_string'] = $original_content_switcher_string; }
 remove_shortcode('string');
 return $content[$n]; }
 
@@ -55,15 +55,17 @@ return $number; }
 function variable_content($atts, $content) {
 extract(shortcode_atts(array('filter' => '', 'name' => 'content', 'string' => '', 'type' => 'get', 'values' => ''), $atts));
 if ($string != '') { $string = do_shortcode(str_replace(array('(', ')'), array('[', ']'), $string)); }
-if (isset($_GET['content_switcher_string'])) { $original_content_switcher_string = $_GET['content_switcher_string']; }
-$_GET['content_switcher_string'] = $string;
+if (isset($GLOBALS['content_switcher_string'])) { $original_content_switcher_string = $GLOBALS['content_switcher_string']; }
+$GLOBALS['content_switcher_string'] = $string;
 $content = explode('[other]', do_shortcode($content));
 $m = count($content);
 
 $type = strtolower($type); switch ($type) {
 case 'cookie': $TYPE = $_COOKIE; break;
 case 'env': $TYPE = $_ENV; break;
+case 'globals': $TYPE = $GLOBALS; break;
 case 'post': $TYPE = $_POST; break;
+case 'request': $TYPE = $_REQUEST; break;
 case 'server': $TYPE = $_SERVER; break;
 case 'session': $TYPE = $_SESSION; break;
 default: $TYPE = $_GET; }
@@ -83,7 +85,7 @@ else { $n = 0; }
 
 add_shortcode('string', 'content_switcher_string');
 $content[$n] = content_switcher_filter_data($filter, do_shortcode($content[$n]));
-if (isset($original_content_switcher_string)) { $_GET['content_switcher_string'] = $original_content_switcher_string; }
+if (isset($original_content_switcher_string)) { $GLOBALS['content_switcher_string'] = $original_content_switcher_string; }
 remove_shortcode('string');
 return $content[$n]; }
 
@@ -94,7 +96,9 @@ extract(shortcode_atts(array('default' => '', 'filter' => '', 'name' => 'content
 $type = strtolower($type); switch ($type) {
 case 'cookie': $TYPE = $_COOKIE; break;
 case 'env': $TYPE = $_ENV; break;
+case 'globals': $TYPE = $GLOBALS; break;
 case 'post': $TYPE = $_POST; break;
+case 'request': $TYPE = $_REQUEST; break;
 case 'server': $TYPE = $_SERVER; break;
 case 'session': $TYPE = $_SESSION; break;
 default: $TYPE = $_GET; }
