@@ -3,7 +3,7 @@
 Plugin Name: Content Switcher
 Plugin URI: http://www.kleor-editions.com/content-switcher
 Description: Allows you to easily display a random number, a random or variable content on your website, and to optimize your website with Google Optimizer and Google Analytics.
-Version: 3.3
+Version: 3.4
 Author: Kleor
 Author URI: http://www.kleor-editions.com
 Text Domain: content-switcher
@@ -25,13 +25,14 @@ GNU General Public License for more details.
 */
 
 
+define('CONTENT_SWITCHER_PATH', dirname(__FILE__));
 define('CONTENT_SWITCHER_URL', plugin_dir_url(__FILE__));
 $plugin_data = get_file_data(__FILE__, array('Version' => 'Version'));
 define('CONTENT_SWITCHER_VERSION', $plugin_data['Version']);
 
-if (is_admin()) { include_once dirname(__FILE__).'/admin.php'; }
+if (is_admin()) { include_once CONTENT_SWITCHER_PATH.'/admin.php'; }
 
-function install_content_switcher() { include dirname(__FILE__).'/install.php'; }
+function install_content_switcher() { include CONTENT_SWITCHER_PATH.'/includes/install.php'; }
 
 register_activation_hook(__FILE__, 'install_content_switcher');
 
@@ -40,46 +41,14 @@ if (((is_multisite()) || ($content_switcher_options)) && ((!isset($content_switc
  || ($content_switcher_options['version'] != CONTENT_SWITCHER_VERSION))) { install_content_switcher(); }
 
 
-function analytics_tracking_js() {
-$analytics_tracking = false;
-if (current_user_can('manage_options')) { if (content_switcher_data('administrator_tracked') == 'yes') { $analytics_tracking = true; } }
-elseif (current_user_can('edit_pages')) { if (content_switcher_data('editor_tracked') == 'yes') { $analytics_tracking = true; } }
-elseif (current_user_can('publish_posts')) { if (content_switcher_data('author_tracked') == 'yes') { $analytics_tracking = true; } }
-elseif (current_user_can('edit_posts')) { if (content_switcher_data('contributor_tracked') == 'yes') { $analytics_tracking = true; } }
-elseif (current_user_can('read')) { if (content_switcher_data('subscriber_tracked') == 'yes') { $analytics_tracking = true; } }
-else { if (content_switcher_data('visitor_tracked') == 'yes') { $analytics_tracking = true; } }
-if ($analytics_tracking) { ?>
-<script type="text/javascript">
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', '<?php echo content_switcher_data('analytics_tracking_id'); ?>']);
-_gaq.push(['_trackPageview']);
-(function() {
-var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
-</script>
-<?php } }
+function analytics_tracking_js() { include CONTENT_SWITCHER_PATH.'/includes/analytics-tracking-js.php'; }
 
 if (content_switcher_data('javascript_enabled') == 'yes') {
 if (content_switcher_data('back_office_tracked') == 'yes') { add_action('admin_footer', 'analytics_tracking_js'); }
 if (content_switcher_data('front_office_tracked') == 'yes') { add_action('wp_footer', 'analytics_tracking_js'); } }
 
 
-function content_switcher_data($atts) {
-global $content_switcher_options;
-if (is_string($atts)) { $field = $atts; $default = ''; $filter = ''; }
-else {
-$field = (isset($atts[0]) ? $atts[0] : '');
-$default = (isset($atts['default']) ? $atts['default'] : '');
-$filter = (isset($atts['filter']) ? $atts['filter'] : ''); }
-$field = str_replace('-', '_', content_switcher_format_nice_name($field));
-if ($field == '') { $field = 'version'; }
-$data = (isset($content_switcher_options[$field]) ? $content_switcher_options[$field] : '');
-$data = (string) do_shortcode($data);
-if ($data == '') { $data = $default; }
-$data = content_switcher_filter_data($filter, $data);
-return $data; }
+function content_switcher_data($atts) { include CONTENT_SWITCHER_PATH.'/includes/data.php'; return $data; }
 
 
 function content_switcher_filter_data($filter, $data) {
@@ -113,56 +82,22 @@ explode(' ', 'a a a a a a c e e e e i i i i n o o o o o o u u u u y y A A A A A 
 $string); }
 
 
-function optimizer_control_js() {
-global $post;
-if ((isset($post)) && (is_object($post))) {
-$optimizer = do_shortcode(get_post_meta($post->ID, 'optimizer', true));
-if (substr($optimizer, 0, 1) != '/') { $optimizer = '/'.$optimizer; }
-$optimizer = explode('/', $optimizer);
-if ((isset($optimizer[2])) && ($optimizer[2] == 'test')) { ?>
-<script type="text/javascript">
-function utmx_section(){}function utmx(){}
-(function(){var k='<?php echo $optimizer[1]; ?>',d=document,l=d.location,c=d.cookie;function f(n){
-if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.indexOf(';',i);return escape(c.substring(i+n.
-length+1,j<0?c.length:j))}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;
-d.write('<sc'+'ript src="'+
-'http'+(l.protocol=='https:'?'s://ssl':'://www')+'.google-analytics.com'
-+'/siteopt.js?v=1&utmxkey='+k+'&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='
-+new Date().valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
-'" type="text/javascript" charset="utf-8"></sc'+'ript>')})();
-</script>
-<?php } } }
+function optimizer_control_js() { include CONTENT_SWITCHER_PATH.'/includes/optimizer-tracking-js.php'; }
 
 if (content_switcher_data('javascript_enabled') == 'yes') { add_action('wp_head', 'optimizer_control_js'); }
 
 
-function optimizer_tracking_js() {
-global $post;
-if ((isset($post)) && (is_object($post))) {
-$optimizer = do_shortcode(get_post_meta($post->ID, 'optimizer', true));
-if (substr($optimizer, 0, 1) != '/') { $optimizer = '/'.$optimizer; }
-$type = substr($optimizer, -4);
-if (($type == 'test') || ($type == 'goal')) { ?>
-<script type="text/javascript">
-if(typeof(_gat)!='object')document.write('<sc'+'ript src="http'+
-(document.location.protocol=='https:'?'s://ssl':'://www')+
-'.google-analytics.com/ga.js"></sc'+'ript>');
-try {
-var gwoTracker=_gat._getTracker("<?php echo content_switcher_data('optimizer_tracking_id'); ?>");
-gwoTracker._trackPageview("<?php echo $optimizer; ?>");
-}catch(err){}
-</script>
-<?php } } }
+function optimizer_tracking_js() { include CONTENT_SWITCHER_PATH.'/includes/optimizer-control-js.php'; }
 
 if (content_switcher_data('javascript_enabled') == 'yes') { add_action('wp_footer', 'optimizer_tracking_js'); }
 
 
 for ($i = 0; $i < 4; $i++) {
 foreach (array('random', 'variable') as $string) {
-add_shortcode($string.'-content'.($i == 0 ? '' : $i), create_function('$atts, $content', 'include_once dirname(__FILE__)."/shortcodes.php"; return '.$string.'_content($atts, $content);')); } }
-add_shortcode('optimizer-content', create_function('$atts, $content', 'include_once dirname(__FILE__)."/shortcodes.php"; return optimizer_content($atts, $content);'));
+add_shortcode($string.'-content'.($i == 0 ? '' : $i), create_function('$atts, $content', 'include_once CONTENT_SWITCHER_PATH."/shortcodes.php"; return '.$string.'_content($atts, $content);')); } }
+add_shortcode('optimizer-content', create_function('$atts, $content', 'include_once CONTENT_SWITCHER_PATH."/shortcodes.php"; return optimizer_content($atts, $content);'));
 foreach (array('random-number', 'variable-string') as $tag) {
-add_shortcode($tag, create_function('$atts', 'include_once dirname(__FILE__)."/shortcodes.php"; return '.str_replace('-', '_', $tag).'($atts);')); }
+add_shortcode($tag, create_function('$atts', 'include_once CONTENT_SWITCHER_PATH."/shortcodes.php"; return '.str_replace('-', '_', $tag).'($atts);')); }
 add_shortcode('content-switcher', 'content_switcher_data');
 
 

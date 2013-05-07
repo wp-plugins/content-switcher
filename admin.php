@@ -32,5 +32,5 @@ add_filter('plugin_row_meta', 'content_switcher_row_meta', 10, 2);
 
 function reset_content_switcher() {
 load_plugin_textdomain('content-switcher', false, 'content-switcher/languages');
-include 'initial-options.php';
+include CONTENT_SWITCHER_PATH.'/initial-options.php';
 update_option('content_switcher', $initial_options); }

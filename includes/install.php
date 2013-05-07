@@ -1,5 +1,5 @@
 <?php load_plugin_textdomain('content-switcher', false, 'content-switcher/languages');
-include dirname(__FILE__).'/initial-options.php';
+include CONTENT_SWITCHER_PATH.'/initial-options.php';
 $options = (array) get_option('content_switcher');
 $current_options = $options;
 if ((isset($options[0])) && ($options[0] === false)) { unset($options[0]); }
