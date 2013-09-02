@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Content Switcher 3.4.1\n"
 "Report-Msgid-Bugs-To: http://www.kleor-editions.com/content-switcher\n"
 "POT-Creation-Date: 2010-07-07 00:00+0000\n"
-"PO-Revision-Date: 2013-08-27 02:40+0100\n"
+"PO-Revision-Date: 2013-09-02 17:03+0100\n"
 "Last-Translator: Kleor <contact@kleor-editions.com>\n"
 "Language-Team: Kleor <contact@kleor-editions.com>\n"
 "MIME-Version: 1.0\n"
@@ -66,12 +66,12 @@ msgid "Settings saved."
 msgstr "Options enregistrées."
 
 #: options-page.php:55
-msgid "Google Analytics Account Tracking ID"
-msgstr "Identifiant de tracking de votre compte Google Analytics"
+msgid "Google Analytics Account Tracking ID:"
+msgstr "Identifiant de tracking de votre compte Google Analytics&nbsp;:"
 
 #: options-page.php:56
-msgid "Google Optimizer Account Tracking ID"
-msgstr "Identifiant de tracking de votre compte Google Optimizer"
+msgid "Google Optimizer Account Tracking ID:"
+msgstr "Identifiant de tracking de votre compte Google Optimizer&nbsp;:"
 
 #: options-page.php:58
 msgid "More informations"
@@ -79,8 +79,8 @@ msgstr "Plus d'informations"
 
 #: options-page.php:59
 #: options-page.php:69
-msgid "Track with Google Analytics the"
-msgstr "Suivre avec Google Analytics les"
+msgid "Track with Google Analytics the:"
+msgstr "Suivre avec Google Analytics les&nbsp;:"
 
 #: options-page.php:61
 msgid "Administrators"

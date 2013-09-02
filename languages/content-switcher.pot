@@ -64,11 +64,11 @@ msgid "Settings saved."
 msgstr ""
 
 #: options-page.php:55
-msgid "Google Analytics Account Tracking ID"
+msgid "Google Analytics Account Tracking ID:"
 msgstr ""
 
 #: options-page.php:56
-msgid "Google Optimizer Account Tracking ID"
+msgid "Google Optimizer Account Tracking ID:"
 msgstr ""
 
 #: options-page.php:58
@@ -76,7 +76,7 @@ msgid "More informations"
 msgstr ""
 
 #: options-page.php:59 options-page.php:69
-msgid "Track with Google Analytics the"
+msgid "Track with Google Analytics the:"
 msgstr ""
 
 #: options-page.php:61

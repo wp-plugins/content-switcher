@@ -52,11 +52,11 @@ if (is_string($value)) { $options[$key] = htmlspecialchars($value); } } ?>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>">
 <?php wp_nonce_field($_GET['page']); ?>
 <p><?php foreach (array(
-'analytics' => __('Google Analytics Account Tracking ID', 'content-switcher'),
-'optimizer' => __('Google Optimizer Account Tracking ID', 'content-switcher')) as $key => $value) {
-echo '<label>'.$value.': <input type="text" name="'.$key.'_tracking_id" id="'.$key.'_tracking_id" value="'.$options[$key.'_tracking_id'].'" size="16" /></label>
+'analytics' => __('Google Analytics Account Tracking ID:', 'content-switcher'),
+'optimizer' => __('Google Optimizer Account Tracking ID:', 'content-switcher')) as $key => $value) {
+echo '<label>'.$value.' <input type="text" name="'.$key.'_tracking_id" id="'.$key.'_tracking_id" value="'.$options[$key.'_tracking_id'].'" size="16" /></label>
 <a href="http://www.kleor-editions.com/content-switcher/#tracking-id">'.__('More informations', 'content-switcher').'</a><br />'; } ?></p>
-<p><?php _e('Track with Google Analytics the', 'content-switcher'); ?>:</p>
+<p><?php _e('Track with Google Analytics the:', 'content-switcher'); ?></p>
 <p style="margin: 1.5em;"><?php foreach (array(
 'administrator' => __('Administrators', 'content-switcher'),
 'editor' => __('Editors', 'content-switcher'),
@@ -66,7 +66,7 @@ echo '<label>'.$value.': <input type="text" name="'.$key.'_tracking_id" id="'.$k
 'visitor' => __('Visitors without any role', 'content-switcher')) as $key => $value) {
 echo '<label><input type="checkbox" name="'.$key.'_tracked" id="'.$key.'_tracked" value="yes"'.($options[$key.'_tracked'] == 'yes' ? ' checked="checked"' : '').' /> '.$value.'<br /></label>'; } ?>
 <span class="description">(<?php _e('you can check several boxes', 'content-switcher'); ?>)</span></p>
-<p><?php _e('Track with Google Analytics the', 'content-switcher'); ?>:</p>
+<p><?php _e('Track with Google Analytics the:', 'content-switcher'); ?></p>
 <p style="margin: 1.5em;"><?php foreach (array(
 'front_office' => __('Front office pages', 'content-switcher'),
 'back_office' => __('Back office pages', 'content-switcher')) as $key => $value) {
