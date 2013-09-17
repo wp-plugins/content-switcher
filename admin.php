@@ -8,6 +8,21 @@ add_options_page('Content Switcher', 'Content Switcher', 'manage_options', 'cont
 add_action('admin_menu', 'content_switcher_options_page');
 
 
+function content_switcher_meta_box($post) {
+include CONTENT_SWITCHER_PATH.'/languages/meta-box/meta-box.php'; ?>
+<ul>
+<li><a target="_blank" href="http://www.kleor-editions.com/content-switcher/"><?php echo $links['']; ?></a>
+ | <a style="color: #808080;" href="#screen-options-wrap" onclick="document.getElementById('show-settings-link').click(); document.getElementById('content-switcher-hide').click();"><?php echo $links['#screen-options-wrap']; ?></a></li>
+<?php foreach (array('', '#screen-options-wrap') as $url) { unset($links[$url]); }
+foreach ($links as $url => $text) {
+echo '<li><a target="_blank" href="http://www.kleor-editions.com/content-switcher/'.$url.'">'.$text.'</a></li>'; } ?>
+</ul>
+<?php }
+
+add_action('add_meta_boxes', create_function('', 'foreach (array("page", "post") as $type) {
+add_meta_box("content-switcher", "Content Switcher", "content_switcher_meta_box", $type, "side"); }'));
+
+
 function content_switcher_action_links($links, $file) {
 if ($file == 'content-switcher/content-switcher.php') {
 if (!is_multisite()) {
