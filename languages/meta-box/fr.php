@@ -1,5 +1,5 @@
 <?php $links = array(
 '' => 'Documentation',
-'#variable-contents' => 'Comment afficher un contenu variable&nbsp;?',
-'#random-contents' => 'Comment afficher un contenu aléatoire&nbsp;?',
+'#variable-contents' => 'Afficher un contenu variable',
+'#random-contents' => 'Afficher un contenu aléatoire',
 '#screen-options-wrap' => 'Cacher cette boîte');

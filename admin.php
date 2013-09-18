@@ -10,9 +10,9 @@ add_action('admin_menu', 'content_switcher_options_page');
 
 function content_switcher_meta_box($post) {
 include CONTENT_SWITCHER_PATH.'/languages/meta-box/meta-box.php'; ?>
+<p><a target="_blank" href="http://www.kleor-editions.com/content-switcher/"><?php echo $links['']; ?></a>
+ | <a style="color: #808080;" href="#screen-options-wrap" onclick="document.getElementById('show-settings-link').click(); document.getElementById('content-switcher-hide').click();"><?php echo $links['#screen-options-wrap']; ?></a></p>
 <ul>
-<li><a target="_blank" href="http://www.kleor-editions.com/content-switcher/"><?php echo $links['']; ?></a>
- | <a style="color: #808080;" href="#screen-options-wrap" onclick="document.getElementById('show-settings-link').click(); document.getElementById('content-switcher-hide').click();"><?php echo $links['#screen-options-wrap']; ?></a></li>
 <?php foreach (array('', '#screen-options-wrap') as $url) { unset($links[$url]); }
 foreach ($links as $url => $text) {
 echo '<li><a target="_blank" href="http://www.kleor-editions.com/content-switcher/'.$url.'">'.$text.'</a></li>'; } ?>
