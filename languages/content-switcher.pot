@@ -129,3 +129,12 @@ msgstr ""
 #: options-page.php:77
 msgid "Save Changes"
 msgstr ""
+
+msgid "Display a variable content"
+msgstr ""
+
+msgid "Display a random content"
+msgstr ""
+
+msgid "Hide this box"
+msgstr ""

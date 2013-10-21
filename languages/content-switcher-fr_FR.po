@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Content Switcher 3.5\n"
 "Report-Msgid-Bugs-To: http://www.kleor-editions.com/content-switcher\n"
 "POT-Creation-Date: 2010-07-07 00:00+0000\n"
-"PO-Revision-Date: 2013-09-16 07:04+0100\n"
+"PO-Revision-Date: 2013-10-18 19:29+0100\n"
 "Last-Translator: Kleor <contact@kleor-editions.com>\n"
 "Language-Team: Kleor <contact@kleor-editions.com>\n"
 "MIME-Version: 1.0\n"
@@ -130,4 +130,13 @@ msgstr "Si vous décochez cette case, Content Switcher n'ajoutera jamais de code
 #: options-page.php:77
 msgid "Save Changes"
 msgstr "Enregistrer les modifications"
+
+msgid "Display a variable content"
+msgstr "Afficher un contenu variable"
+
+msgid "Display a random content"
+msgstr "Afficher un contenu aléatoire"
+
+msgid "Hide this box"
+msgstr "Cacher cette boîte"
 
