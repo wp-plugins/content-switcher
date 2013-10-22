@@ -3,13 +3,18 @@ load_plugin_textdomain('content-switcher', false, 'content-switcher/languages');
 
 
 function content_switcher_options_page() {
-add_options_page('Content Switcher', 'Content Switcher', 'manage_options', 'content-switcher', create_function('', 'include_once "options-page.php";')); }
+add_options_page('Content Switcher', 'Content Switcher', 'manage_options', 'content-switcher', create_function('', 'include_once CONTENT_SWITCHER_PATH."/options-page.php";')); }
 
 add_action('admin_menu', 'content_switcher_options_page');
 
 
 function content_switcher_meta_box($post) {
-include CONTENT_SWITCHER_PATH.'/languages/meta-box/meta-box.php'; ?>
+load_plugin_textdomain('content-switcher', false, 'content-switcher/languages');
+$links = array(
+'' => __('Documentation', 'content-switcher'),
+'#variable-contents' => __('Display a variable content', 'content-switcher'),
+'#random-contents' => __('Display a random content', 'content-switcher'),
+'#screen-options-wrap' => __('Hide this box', 'content-switcher')); ?>
 <p><a target="_blank" href="http://www.kleor-editions.com/content-switcher/"><?php echo $links['']; ?></a>
  | <a style="color: #808080;" href="#screen-options-wrap" onclick="document.getElementById('show-settings-link').click(); document.getElementById('content-switcher-hide').click();"><?php echo $links['#screen-options-wrap']; ?></a></p>
 <ul>

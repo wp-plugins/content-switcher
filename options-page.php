@@ -7,7 +7,7 @@ if ($_GET['action'] == 'reset') { reset_content_switcher(); } else { delete_opti
 echo '<div class="updated"><p><strong>'.($_GET['action'] == 'reset' ? __('Options reset.', 'content-switcher') : __('Options deleted.', 'content-switcher')).'</strong></p></div>
 <script type="text/javascript">setTimeout(\'window.location = "'.($_GET['action'] == 'reset' ? 'options-general.php?page=content-switcher' : 'plugins.php').'"\', 2000);</script>'; } ?>
 <?php if (!isset($_POST['submit'])) { ?>
-<form method="post" action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>">
+<form method="post" action="<?php echo esc_attr($_SERVER['REQUEST_URI']); ?>">
 <?php wp_nonce_field($_GET['page']); ?>
 <div class="alignleft actions">
 <?php if ($_GET['action'] == 'reset') { _e('Do you really want to reset the options of Content Switcher?', 'content-switcher'); }
@@ -19,7 +19,7 @@ else { _e('Do you really want to permanently delete the options of Content Switc
 
 else {
 if ((isset($_POST['submit'])) && (check_admin_referer($_GET['page']))) {
-include 'initial-options.php';
+include CONTENT_SWITCHER_PATH.'/initial-options.php';
 foreach ($_POST as $key => $value) {
 if (is_string($value)) { $_POST[$key] = stripslashes(html_entity_decode(str_replace('&nbsp;', ' ', $value))); } }
 foreach (array(
@@ -49,7 +49,7 @@ if (is_string($value)) { $options[$key] = htmlspecialchars($value); } } ?>
 <div class="clear"></div>
 <?php if (isset($_POST['submit'])) { echo '<div class="updated"><p><strong>'.__('Settings saved.').'</strong></p></div>'; } ?>
 <h3><?php _e('Options', 'content-switcher'); ?></h3>
-<form method="post" action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>">
+<form method="post" action="<?php echo esc_attr($_SERVER['REQUEST_URI']); ?>">
 <?php wp_nonce_field($_GET['page']); ?>
 <p><?php foreach (array(
 'analytics' => __('Google Analytics Account Tracking ID:', 'content-switcher'),
@@ -74,7 +74,7 @@ echo '<label><input type="checkbox" name="'.$key.'_tracked" id="'.$key.'_tracked
 <span class="description">(<?php _e('you can check several boxes', 'content-switcher'); ?>)</span></p>
 <p><label><input type="checkbox" name="javascript_enabled" id="javascript_enabled" value="yes"<?php if ($options['javascript_enabled'] == 'yes') { echo ' checked="checked"'; } ?> /> <?php _e('Add JavaScript code', 'content-switcher'); ?><br /></label>
 <span class="description"><?php _e('If you uncheck this box, Content Switcher will never add any JavaScript code to the pages of your website, but Google Analytics and Google Optimizer will not work.', 'content-switcher'); ?></span></p>
-<p class="submit" style="margin: 0 20%;"><input type="submit" class="button-primary" name="submit" id="submit" value="<?php _e('Save Changes'); ?>" /></p>
+<p class="submit" style="margin: 0 20%;"><input type="submit" class="button-primary" name="submit" id="submit" value="<?php _e('Save Changes', 'content-switcher'); ?>" /></p>
 </form>
 </div>
 <?php }

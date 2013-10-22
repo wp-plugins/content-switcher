@@ -3,7 +3,7 @@
 Plugin Name: Content Switcher
 Plugin URI: http://www.kleor-editions.com/content-switcher
 Description: Allows you to easily display a random number, a random or variable content on your website, and to optimize your website with Google Optimizer and Google Analytics.
-Version: 3.5
+Version: 3.5.1
 Author: Kleor
 Author URI: http://www.kleor-editions.com
 Text Domain: content-switcher
@@ -51,8 +51,15 @@ if (content_switcher_data('front_office_tracked') == 'yes') { add_action('wp_foo
 function content_switcher_data($atts) { include CONTENT_SWITCHER_PATH.'/includes/data.php'; return $data; }
 
 
+function content_switcher_do_shortcode($string) {
+$string = do_shortcode(str_replace(array('(', ')'), array('[', ']'), $string));
+$string = str_replace(array('[', ']'), array('(', ')'), $string);
+$string = str_replace(array('&#40;', '&#41;'), array('(', ')'), $string);
+return $string; }
+
+
 function content_switcher_filter_data($filter, $data) {
-if (is_string($filter)) { $filter = preg_split('#[^a-zA-Z0-9_]#', str_replace('-', '_', $filter), 0, PREG_SPLIT_NO_EMPTY); }
+if (is_string($filter)) { $filter = preg_split('#[^a-zA-Z0-9_]#', str_replace('-', '_', content_switcher_do_shortcode($filter)), 0, PREG_SPLIT_NO_EMPTY); }
 if (is_array($filter)) { foreach ($filter as $function) { $data = content_switcher_string_map($function, $data); } }
 return $data; }
 
@@ -60,7 +67,7 @@ return $data; }
 function content_switcher_format_nice_name($string) {
 $string = content_switcher_strip_accents(strtolower(trim(strip_tags($string))));
 $string = str_replace(' ', '-', $string);
-$string = preg_replace('/[^a-zA-Z0-9_-]/', '', $string);
+$string = preg_replace('/[^a-z0-9_-]/', '', $string);
 return $string; }
 
 
