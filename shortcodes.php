@@ -2,7 +2,7 @@
 $atts = array_map('content_switcher_do_shortcode', (array) $atts);
 extract(shortcode_atts(array('default' => '', 'filter' => ''), $atts));
 $string = $GLOBALS['content_switcher_string'];
-if ($string == '') { $string = $default; }
+if ($string === '') { $string = $default; }
 $string = content_switcher_filter_data($filter, $string);
 return $string; }
 
@@ -111,6 +111,6 @@ default: $TYPE = $_GET; }
 
 if (!isset($TYPE[$name])) { $string = ''; }
 else { $string = htmlspecialchars($TYPE[$name]); }
-if ($string == '') { $string = $default; }
+if ($string === '') { $string = $default; }
 $string = content_switcher_filter_data($filter, $string);
 return $string; }

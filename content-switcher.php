@@ -52,9 +52,10 @@ function content_switcher_data($atts) { include CONTENT_SWITCHER_PATH.'/includes
 
 
 function content_switcher_do_shortcode($string) {
+$string = (string) $string;
 $string = do_shortcode(str_replace(array('(', ')'), array('[', ']'), $string));
 $string = str_replace(array('[', ']'), array('(', ')'), $string);
-$string = str_replace(array('&#40;', '&#41;'), array('(', ')'), $string);
+$string = str_replace(array('&#40;', '&#41;', '&#91;', '&#93;'), array('(', ')', '[', ']'), $string);
 return $string; }
 
 

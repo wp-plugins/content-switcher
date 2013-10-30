@@ -7,5 +7,5 @@ foreach (array('default', 'filter') as $key) { $$key = (isset($atts[$key]) ? $at
 $field = str_replace('-', '_', content_switcher_format_nice_name($field));
 $data = (isset($content_switcher_options[$field]) ? $content_switcher_options[$field] : '');
 $data = (string) do_shortcode($data);
-if ($data == '') { $data = $default; }
+if ($data === '') { $data = $default; }
 $data = content_switcher_filter_data($filter, $data);
