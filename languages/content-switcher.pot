@@ -1,0 +1,140 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Content Switcher 3.5.2\n"
+"Report-Msgid-Bugs-To: http://www.kleor-editions.com/content-switcher\n"
+"POT-Creation-Date: 2010-07-07 00:00+0000\n"
+"PO-Revision-Date: 2010-07-07 00:00+0000\n"
+"Last-Translator: Kleor <contact@kleor-editions.com>\n"
+"Language-Team: Kleor <contact@kleor-editions.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
+
+msgid "Allows you to easily display a random number, a random or variable content on your website, and to optimize your website with Google Optimizer and Google Analytics."
+msgstr ""
+
+#: admin.php:15
+msgid "Uninstall"
+msgstr ""
+
+#: admin.php:17
+msgid "Reset"
+msgstr ""
+
+#: admin.php:18 options-page.php:51
+msgid "Options"
+msgstr ""
+
+#: admin.php:27 options-page.php:47
+msgid "Documentation"
+msgstr ""
+
+#: languages/index.php:3
+msgid "no"
+msgstr ""
+
+#: languages/index.php:4
+msgid "yes"
+msgstr ""
+
+#: options-page.php:7
+msgid "Options reset."
+msgstr ""
+
+#: options-page.php:7
+msgid "Options deleted."
+msgstr ""
+
+#: options-page.php:13
+msgid "Do you really want to reset the options of Content Switcher?"
+msgstr ""
+
+#: options-page.php:14
+msgid ""
+"Do you really want to permanently delete the options of Content Switcher?"
+msgstr ""
+
+#: options-page.php:15
+msgid "Yes"
+msgstr ""
+
+#: options-page.php:50
+msgid "Settings saved."
+msgstr ""
+
+#: options-page.php:55
+msgid "Google Analytics Account Tracking ID:"
+msgstr ""
+
+#: options-page.php:56
+msgid "Google Optimizer Account Tracking ID:"
+msgstr ""
+
+#: options-page.php:58
+msgid "More informations"
+msgstr ""
+
+#: options-page.php:59 options-page.php:69
+msgid "Track with Google Analytics the:"
+msgstr ""
+
+#: options-page.php:61
+msgid "Administrators"
+msgstr ""
+
+#: options-page.php:62
+msgid "Editors"
+msgstr ""
+
+#: options-page.php:63
+msgid "Authors"
+msgstr ""
+
+#: options-page.php:64
+msgid "Contributors"
+msgstr ""
+
+#: options-page.php:65
+msgid "Subscribers"
+msgstr ""
+
+#: options-page.php:66
+msgid "Visitors without any role"
+msgstr ""
+
+#: options-page.php:68 options-page.php:74
+msgid "you can check several boxes"
+msgstr ""
+
+#: options-page.php:71
+msgid "Front office pages"
+msgstr ""
+
+#: options-page.php:72
+msgid "Back office pages"
+msgstr ""
+
+#: options-page.php:75
+msgid "Add JavaScript code"
+msgstr ""
+
+#: options-page.php:76
+msgid ""
+"If you uncheck this box, Content Switcher will never add any JavaScript code "
+"to the pages of your website, but Google Analytics and Google Optimizer will "
+"not work."
+msgstr ""
+
+#: options-page.php:77
+msgid "Save Changes"
+msgstr ""
+
+msgid "Display a variable content"
+msgstr ""
+
+msgid "Display a random content"
+msgstr ""
+
+msgid "Hide this box"
+msgstr ""
