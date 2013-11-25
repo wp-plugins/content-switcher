@@ -1,17 +1,17 @@
 <?php
 /*
 Plugin Name: Content Switcher
-Plugin URI: http://www.kleor-editions.com/content-switcher
+Plugin URI: http://www.kleor.com/content-switcher
 Description: Allows you to easily display a random number, a random or variable content on your website, and to optimize your website with Google Optimizer and Google Analytics.
-Version: 3.5.2
+Version: 3.5.3
 Author: Kleor
-Author URI: http://www.kleor-editions.com
+Author URI: http://www.kleor.com
 Text Domain: content-switcher
 License: GPL2
 */
 
 /* 
-Copyright 2010 Kleor Editions (http://www.kleor-editions.com)
+Copyright 2010 Kleor (http://www.kleor.com)
 
 This program is a free software. You can redistribute it and/or 
 modify it under the terms of the GNU General Public License as 

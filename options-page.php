@@ -44,7 +44,7 @@ if (is_string($value)) { $options[$key] = htmlspecialchars($value); } } ?>
 <div class="wrap">
 <h2 style="float: left;">Content Switcher</h2>
 <ul class="subsubsub" style="margin: 1.25em 0 1.5em 6em; float: left; white-space: normal;">
-<li><a href="http://www.kleor-editions.com/content-switcher"><?php _e('Documentation', 'content-switcher'); ?></a></li>
+<li><a href="http://www.kleor.com/content-switcher"><?php _e('Documentation', 'content-switcher'); ?></a></li>
 </ul>
 <div class="clear"></div>
 <?php if (isset($_POST['submit'])) { echo '<div class="updated"><p><strong>'.__('Settings saved.').'</strong></p></div>'; } ?>
@@ -55,8 +55,8 @@ if (is_string($value)) { $options[$key] = htmlspecialchars($value); } } ?>
 'analytics' => __('Google Analytics Account Tracking ID:', 'content-switcher'),
 'optimizer' => __('Google Optimizer Account Tracking ID:', 'content-switcher')) as $key => $value) {
 echo '<label>'.$value.' <input type="text" name="'.$key.'_tracking_id" id="'.$key.'_tracking_id" value="'.$options[$key.'_tracking_id'].'" size="16" /></label>
-<a href="http://www.kleor-editions.com/content-switcher/#'.($key == 'analytics' ? 'google-analytics' : 'tracking-id').'">'.__('More informations', 'content-switcher').'</a><br />'; } ?></p>
-<p><?php _e('Track with Google Analytics the:', 'content-switcher'); ?> <a href="http://www.kleor-editions.com/content-switcher/#google-analytics"><?php _e('More informations', 'content-switcher'); ?></a></p>
+<span class="description"><a href="http://www.kleor.com/content-switcher/#'.($key == 'analytics' ? 'google-analytics' : 'tracking-id').'">'.__('More informations', 'content-switcher').'</a></span><br />'; } ?></p>
+<p><?php _e('Track with Google Analytics the:', 'content-switcher'); ?> <span class="description"><a href="http://www.kleor.com/content-switcher/#google-analytics"><?php _e('More informations', 'content-switcher'); ?></a></span></p>
 <p style="margin: 1.5em;"><?php foreach (array(
 'administrator' => __('Administrators', 'content-switcher'),
 'editor' => __('Editors', 'content-switcher'),
@@ -66,7 +66,7 @@ echo '<label>'.$value.' <input type="text" name="'.$key.'_tracking_id" id="'.$ke
 'visitor' => __('Visitors without any role', 'content-switcher')) as $key => $value) {
 echo '<label><input type="checkbox" name="'.$key.'_tracked" id="'.$key.'_tracked" value="yes"'.($options[$key.'_tracked'] == 'yes' ? ' checked="checked"' : '').' /> '.$value.'<br /></label>'; } ?>
 <span class="description">(<?php _e('you can check several boxes', 'content-switcher'); ?>)</span></p>
-<p><?php _e('Track with Google Analytics the:', 'content-switcher'); ?> <a href="http://www.kleor-editions.com/content-switcher/#google-analytics"><?php _e('More informations', 'content-switcher'); ?></a></p>
+<p><?php _e('Track with Google Analytics the:', 'content-switcher'); ?> <span class="description"><a href="http://www.kleor.com/content-switcher/#google-analytics"><?php _e('More informations', 'content-switcher'); ?></a></span></p>
 <p style="margin: 1.5em;"><?php foreach (array(
 'front_office' => __('Front office pages', 'content-switcher'),
 'back_office' => __('Back office pages', 'content-switcher')) as $key => $value) {

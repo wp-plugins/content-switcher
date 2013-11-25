@@ -15,12 +15,12 @@ $links = array(
 '#variable-contents' => __('Display a variable content', 'content-switcher'),
 '#random-contents' => __('Display a random content', 'content-switcher'),
 '#screen-options-wrap' => __('Hide this box', 'content-switcher')); ?>
-<p><a target="_blank" href="http://www.kleor-editions.com/content-switcher/"><?php echo $links['']; ?></a>
+<p><a target="_blank" href="http://www.kleor.com/content-switcher/"><?php echo $links['']; ?></a>
  | <a style="color: #808080;" href="#screen-options-wrap" onclick="document.getElementById('show-settings-link').click(); document.getElementById('content-switcher-hide').click();"><?php echo $links['#screen-options-wrap']; ?></a></p>
 <ul>
 <?php foreach (array('', '#screen-options-wrap') as $url) { unset($links[$url]); }
 foreach ($links as $url => $text) {
-echo '<li><a target="_blank" href="http://www.kleor-editions.com/content-switcher/'.$url.'">'.$text.'</a></li>'; } ?>
+echo '<li><a target="_blank" href="http://www.kleor.com/content-switcher/'.$url.'">'.$text.'</a></li>'; } ?>
 </ul>
 <?php }
 
@@ -44,7 +44,7 @@ add_filter('plugin_action_links', 'content_switcher_action_links', 10, 2);
 function content_switcher_row_meta($links, $file) {
 if ($file == 'content-switcher/content-switcher.php') {
 $links = array_merge($links, array(
-'<a href="http://www.kleor-editions.com/content-switcher">'.__('Documentation', 'content-switcher').'</a>')); }
+'<a href="http://www.kleor.com/content-switcher">'.__('Documentation', 'content-switcher').'</a>')); }
 return $links; }
 
 add_filter('plugin_row_meta', 'content_switcher_row_meta', 10, 2);
