@@ -30,11 +30,9 @@ add_meta_box("content-switcher", "Content Switcher", "content_switcher_meta_box"
 
 function content_switcher_action_links($links, $file) {
 if ($file == 'content-switcher/content-switcher.php') {
-if (!is_multisite()) {
 $links = array_merge($links, array(
-'<a href="options-general.php?page=content-switcher&amp;action=uninstall">'.__('Uninstall', 'content-switcher').'</a>')); }
-$links = array_merge($links, array(
-'<a href="options-general.php?page=content-switcher&amp;action=reset">'.__('Reset', 'content-switcher').'</a>',
+'<span class="delete"><a href="options-general.php?page=content-switcher&amp;action=uninstall" title="'.__('Delete the options of Content Switcher', 'content-switcher').'">'.__('Uninstall', 'content-switcher').'</a></span>',
+'<span class="delete"><a href="options-general.php?page=content-switcher&amp;action=reset" title="'.__('Reset the options of Content Switcher', 'content-switcher').'">'.__('Reset', 'content-switcher').'</a></span>',
 '<a href="options-general.php?page=content-switcher">'.__('Options', 'content-switcher').'</a>')); }
 return $links; }
 

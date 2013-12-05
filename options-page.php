@@ -1,6 +1,7 @@
 <?php if ((isset($_GET['action'])) && (($_GET['action'] == 'reset') || ($_GET['action'] == 'uninstall'))) {
 if ((isset($_POST['submit'])) && (check_admin_referer($_GET['page']))) {
-if ($_GET['action'] == 'reset') { reset_content_switcher(); } else { delete_option('content_switcher'); } } ?>
+if ($_GET['action'] == 'reset') { reset_content_switcher(); }
+else { deactivate_plugins('content-switcher/content-switcher.php'); delete_option('content_switcher'); } } ?>
 <div class="wrap">
 <h2>Content Switcher</h2>
 <?php if (isset($_POST['submit'])) {
@@ -47,7 +48,7 @@ if (is_string($value)) { $options[$key] = htmlspecialchars($value); } } ?>
 <li><a href="http://www.kleor.com/content-switcher"><?php _e('Documentation', 'content-switcher'); ?></a></li>
 </ul>
 <div class="clear"></div>
-<?php if (isset($_POST['submit'])) { echo '<div class="updated"><p><strong>'.__('Settings saved.').'</strong></p></div>'; } ?>
+<?php if (isset($_POST['submit'])) { echo '<div class="updated"><p><strong>'.__('Settings saved.', 'content-switcher').'</strong></p></div>'; } ?>
 <h3><?php _e('Options', 'content-switcher'); ?></h3>
 <form method="post" action="<?php echo esc_attr($_SERVER['REQUEST_URI']); ?>">
 <?php wp_nonce_field($_GET['page']); ?>

@@ -3,7 +3,7 @@
 Plugin Name: Content Switcher
 Plugin URI: http://www.kleor.com/content-switcher
 Description: Allows you to easily display a random number, a random or variable content on your website, and to optimize your website with Google Optimizer and Google Analytics.
-Version: 3.5.3
+Version: 3.6
 Author: Kleor
 Author URI: http://www.kleor.com
 Text Domain: content-switcher
@@ -36,9 +36,8 @@ function install_content_switcher() { include CONTENT_SWITCHER_PATH.'/includes/i
 
 register_activation_hook(__FILE__, 'install_content_switcher');
 
-$content_switcher_options = get_option('content_switcher');
-if (((is_multisite()) || ($content_switcher_options)) && ((!isset($content_switcher_options['version']))
- || ($content_switcher_options['version'] != CONTENT_SWITCHER_VERSION))) { install_content_switcher(); }
+$content_switcher_options = (array) get_option('content_switcher');
+if ((!isset($content_switcher_options['version'])) || ($content_switcher_options['version'] != CONTENT_SWITCHER_VERSION)) { install_content_switcher(); }
 
 
 function analytics_tracking_js() { include CONTENT_SWITCHER_PATH.'/includes/analytics-tracking-js.php'; }
