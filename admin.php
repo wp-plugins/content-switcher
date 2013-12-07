@@ -28,15 +28,18 @@ add_action('add_meta_boxes', create_function('', 'foreach (array("page", "post")
 add_meta_box("content-switcher", "Content Switcher", "content_switcher_meta_box", $type, "side"); }'));
 
 
-function content_switcher_action_links($links, $file) {
-if ($file == 'content-switcher/content-switcher.php') {
+function content_switcher_action_links($links) {
+if (!is_network_admin()) {
 $links = array_merge($links, array(
 '<span class="delete"><a href="options-general.php?page=content-switcher&amp;action=uninstall" title="'.__('Delete the options of Content Switcher', 'content-switcher').'">'.__('Uninstall', 'content-switcher').'</a></span>',
 '<span class="delete"><a href="options-general.php?page=content-switcher&amp;action=reset" title="'.__('Reset the options of Content Switcher', 'content-switcher').'">'.__('Reset', 'content-switcher').'</a></span>',
 '<a href="options-general.php?page=content-switcher">'.__('Options', 'content-switcher').'</a>')); }
+else {
+$links = array_merge($links, array(
+'<span class="delete"><a href="../options-general.php?page=content-switcher&amp;action=uninstall&amp;for=network" title="'.__('Delete the options of Content Switcher for all sites in this network', 'content-switcher').'">'.__('Uninstall', 'content-switcher').'</a></span>')); }
 return $links; }
 
-add_filter('plugin_action_links', 'content_switcher_action_links', 10, 2);
+foreach (array('', 'network_admin_') as $prefix) { add_filter($prefix.'plugin_action_links_content-switcher/content-switcher.php', 'content_switcher_action_links', 10, 2); }
 
 
 function content_switcher_row_meta($links, $file) {
@@ -52,3 +55,6 @@ function reset_content_switcher() {
 load_plugin_textdomain('content-switcher', false, 'content-switcher/languages');
 include CONTENT_SWITCHER_PATH.'/initial-options.php';
 update_option('content_switcher', $initial_options); }
+
+
+function uninstall_content_switcher($for = 'single') { include CONTENT_SWITCHER_PATH.'/includes/uninstall.php'; }

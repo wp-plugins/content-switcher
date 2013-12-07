@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Content Switcher 3.5.3\n"
 "Report-Msgid-Bugs-To: http://www.kleor.com/content-switcher\n"
 "POT-Creation-Date: 2010-07-07 00:00+0000\n"
-"PO-Revision-Date: 2013-11-26 23:48+0100\n"
+"PO-Revision-Date: 2013-12-06 20:56+0100\n"
 "Last-Translator: Kleor <contact@kleor.com>\n"
 "Language-Team: Kleor <contact@kleor.com>\n"
 "MIME-Version: 1.0\n"
@@ -140,4 +140,19 @@ msgstr "Mostrar un contenido aleatorio"
 
 msgid "Hide this box"
 msgstr "Esconder esta caja"
+
+#, fuzzy
+msgid "Delete the options of Content Switcher"
+msgstr "¿Está seguro que desea restaurar las opciones de Content Switcher?"
+
+#, fuzzy
+msgid "Reset the options of Content Switcher"
+msgstr "¿Está seguro que desea restaurar las opciones de Content Switcher?"
+
+msgid "Delete the options of Content Switcher for all sites in this network"
+msgstr ""
+
+#, fuzzy
+msgid "Do you really want to permanently delete the options of Content Switcher for all sites in this network?"
+msgstr "¿Está seguro que desea borrar permanentemente las opciones de Content Switcher?"
 
