@@ -8,6 +8,18 @@ add_options_page('Content Switcher', 'Content Switcher', 'manage_options', 'cont
 add_action('admin_menu', 'content_switcher_options_page');
 
 
+function content_switcher_options_page_css() { ?>
+<style type="text/css">
+.wrap h2 { float: left; }
+.wrap input.button-secondary, .wrap select { vertical-align: 0; }
+.wrap p.submit { margin: 0 20%; }
+.wrap ul.subsubsub { margin: 1em 0 1.5em 6em; float: left; white-space: normal; }
+</style> 
+<?php }
+
+if ((isset($_GET['page'])) && (strstr($_GET['page'], 'content-switcher'))) { add_action('admin_head', 'content_switcher_options_page_css'); }
+
+
 function content_switcher_meta_box($post) {
 load_plugin_textdomain('content-switcher', false, 'content-switcher/languages');
 $links = array(
