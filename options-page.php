@@ -4,6 +4,8 @@ if ((isset($_POST['submit'])) && (check_admin_referer($_GET['page']))) {
 if ($_GET['action'] == 'reset') { reset_content_switcher(); } else { uninstall_content_switcher($for); } } ?>
 <div class="wrap">
 <h2>Content Switcher</h2>
+<ul class="subsubsub"><li><a href="http://www.kleor.com/content-switcher"><?php _e('Documentation', 'content-switcher'); ?></a></li></ul>
+<div class="clear"></div>
 <?php if (isset($_POST['submit'])) {
 echo '<div class="updated"><p><strong>'.($_GET['action'] == 'reset' ? __('Options reset.', 'content-switcher') : __('Options deleted.', 'content-switcher')).'</strong></p></div>
 <script type="text/javascript">setTimeout(\'window.location = "'.($_GET['action'] == 'reset' ? 'options-general.php?page=content-switcher' : ($for == 'network' ? 'network/' : '').'plugins.php').'"\', 2000);</script>'; } ?>
@@ -44,10 +46,8 @@ foreach ($options as $key => $value) {
 if (is_string($value)) { $options[$key] = htmlspecialchars($value); } } ?>
 
 <div class="wrap">
-<h2 style="float: left;">Content Switcher</h2>
-<ul class="subsubsub" style="margin: 1.25em 0 1.5em 6em; float: left; white-space: normal;">
-<li><a href="http://www.kleor.com/content-switcher"><?php _e('Documentation', 'content-switcher'); ?></a></li>
-</ul>
+<h2>Content Switcher</h2>
+<ul class="subsubsub"><li><a href="http://www.kleor.com/content-switcher"><?php _e('Documentation', 'content-switcher'); ?></a></li></ul>
 <div class="clear"></div>
 <?php if (isset($_POST['submit'])) { echo '<div class="updated"><p><strong>'.__('Settings saved.', 'content-switcher').'</strong></p></div>'; } ?>
 <h3><?php _e('Options', 'content-switcher'); ?></h3>
@@ -76,7 +76,7 @@ echo '<label><input type="checkbox" name="'.$key.'_tracked" id="'.$key.'_tracked
 <span class="description">(<?php _e('you can check several boxes', 'content-switcher'); ?>)</span></p>
 <p><label><input type="checkbox" name="javascript_enabled" id="javascript_enabled" value="yes"<?php if ($options['javascript_enabled'] == 'yes') { echo ' checked="checked"'; } ?> /> <?php _e('Add JavaScript code', 'content-switcher'); ?><br /></label>
 <span class="description"><?php _e('If you uncheck this box, Content Switcher will never add any JavaScript code to the pages of your website, but Google Analytics and Google Optimizer will not work.', 'content-switcher'); ?></span></p>
-<p class="submit" style="margin: 0 20%;"><input type="submit" class="button-primary" name="submit" id="submit" value="<?php _e('Save Changes', 'content-switcher'); ?>" /></p>
+<p class="submit"><input type="submit" class="button-primary" name="submit" id="submit" value="<?php _e('Save Changes', 'content-switcher'); ?>" /></p>
 </form>
 </div>
 <?php }
