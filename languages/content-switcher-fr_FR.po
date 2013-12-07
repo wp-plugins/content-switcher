@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Content Switcher 3.6\n"
 "Report-Msgid-Bugs-To: http://www.kleor.com/content-switcher\n"
 "POT-Creation-Date: 2010-07-07 00:00+0000\n"
-"PO-Revision-Date: 2013-12-05 21:42+0100\n"
+"PO-Revision-Date: 2013-12-06 20:57+0100\n"
 "Last-Translator: Kleor <contact@kleor.com>\n"
 "Language-Team: Kleor <contact@kleor.com>\n"
 "MIME-Version: 1.0\n"
@@ -145,4 +145,10 @@ msgstr "Supprimer les options de Content Switcher"
 
 msgid "Reset the options of Content Switcher"
 msgstr "Réinitialiser les options de Content Switcher"
+
+msgid "Delete the options of Content Switcher for all sites in this network"
+msgstr "Supprimer les options de Content Switcher pour tous les sites de ce réseau"
+
+msgid "Do you really want to permanently delete the options of Content Switcher for all sites in this network?"
+msgstr "Souhaitez-vous vraiment supprimer définitivement les options de Content Switcher pour tous les sites de ce réseau&nbsp;?"
 

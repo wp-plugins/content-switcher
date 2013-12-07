@@ -144,3 +144,9 @@ msgstr ""
 
 msgid "Reset the options of Content Switcher"
 msgstr ""
+
+msgid "Delete the options of Content Switcher for all sites in this network"
+msgstr ""
+
+msgid "Do you really want to permanently delete the options of Content Switcher for all sites in this network?"
+msgstr ""
