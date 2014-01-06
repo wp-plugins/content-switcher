@@ -23,7 +23,7 @@ else { _e('Do you really want to permanently delete the options of Content Switc
 
 else {
 if ((isset($_POST['submit'])) && (check_admin_referer($_GET['page']))) {
-include CONTENT_SWITCHER_PATH.'/initial-options.php';
+include CONTENT_SWITCHER_PATH.'initial-options.php';
 foreach ($_POST as $key => $value) {
 if (is_string($value)) { $_POST[$key] = stripslashes(html_entity_decode(str_replace('&nbsp;', ' ', $value))); } }
 foreach (array(

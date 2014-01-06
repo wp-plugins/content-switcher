@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Content Switcher 3.6\n"
+"Project-Id-Version: Content Switcher 3.6.1\n"
 "Report-Msgid-Bugs-To: http://www.kleor.com/content-switcher\n"
 "POT-Creation-Date: 2010-07-07 00:00+0000\n"
 "PO-Revision-Date: 2010-07-07 00:00+0000\n"

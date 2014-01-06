@@ -1,4 +1,5 @@
 <?php global $content_switcher_options;
+if (empty($content_switcher_options)) { $content_switcher_options = (array) get_option('content_switcher'); }
 if (is_string($atts)) { $field = $atts; $default = ''; $filter = ''; }
 else {
 $atts = array_map('content_switcher_do_shortcode', (array) $atts);
