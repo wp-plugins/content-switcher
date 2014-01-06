@@ -1,0 +1,158 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Content Switcher 3.5.3\n"
+"Report-Msgid-Bugs-To: http://www.kleor.com/content-switcher\n"
+"POT-Creation-Date: 2010-07-07 00:00+0000\n"
+"PO-Revision-Date: 2014-01-06 11:06+0100\n"
+"Last-Translator: Kleor <contact@kleor.com>\n"
+"Language-Team: Kleor <contact@kleor.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
+"Language: fr\n"
+"X-Generator: Poedit 1.5.5\n"
+
+msgid "Allows you to easily display a random number, a random or variable content on your website, and to optimize your website with Google Optimizer and Google Analytics."
+msgstr "Le permite mostrar un número aleatorio fácilmente, un contenido variable o aleatorio en su sitio web, y optimizar su sitio web con Google Optimizer y Google Analytics."
+
+#: admin.php:15
+msgid "Uninstall"
+msgstr "Desinstalar"
+
+#: admin.php:17
+msgid "Reset"
+msgstr "Resetear"
+
+#: admin.php:18
+#: options-page.php:51
+msgid "Options"
+msgstr "Opciones"
+
+#: admin.php:27
+#: options-page.php:47
+msgid "Documentation"
+msgstr "Documentación"
+
+#: languages/index.php:3
+msgid "no"
+msgstr "no"
+
+#: languages/index.php:4
+msgid "yes"
+msgstr "si"
+
+#: options-page.php:7
+msgid "Options reset."
+msgstr "Opciones restauradas."
+
+#: options-page.php:7
+msgid "Options deleted."
+msgstr "Opciones borradas."
+
+#: options-page.php:13
+msgid "Do you really want to reset the options of Content Switcher?"
+msgstr "¿Está seguro que desea restaurar las opciones de Content Switcher?"
+
+#: options-page.php:14
+msgid "Do you really want to permanently delete the options of Content Switcher?"
+msgstr "¿Está seguro que desea borrar permanentemente las opciones de Content Switcher?"
+
+#: options-page.php:15
+msgid "Yes"
+msgstr "Sí"
+
+#: options-page.php:50
+msgid "Settings saved."
+msgstr "Ajustes salvados."
+
+#: options-page.php:55
+msgid "Google Analytics Account Tracking ID:"
+msgstr "ID de Trackeo de Google Analytics Account:"
+
+#: options-page.php:56
+msgid "Google Optimizer Account Tracking ID:"
+msgstr "ID de Trackeo de Google Optimizer Account:"
+
+#: options-page.php:58
+msgid "More informations"
+msgstr "Más informaciones"
+
+#: options-page.php:59
+#: options-page.php:69
+msgid "Track with Google Analytics the:"
+msgstr "Trackear con Google Analytics los:"
+
+#: options-page.php:61
+msgid "Administrators"
+msgstr "Administradores"
+
+#: options-page.php:62
+msgid "Editors"
+msgstr "Editores"
+
+#: options-page.php:63
+msgid "Authors"
+msgstr "Autores"
+
+#: options-page.php:64
+msgid "Contributors"
+msgstr "Contribuyentes"
+
+#: options-page.php:65
+msgid "Subscribers"
+msgstr "Suscriptores"
+
+#: options-page.php:66
+msgid "Visitors without any role"
+msgstr "Visitantes sin ningún rol"
+
+#: options-page.php:68
+#: options-page.php:74
+msgid "you can check several boxes"
+msgstr "usted puede seleccionar varias cajas"
+
+#: options-page.php:71
+msgid "Front office pages"
+msgstr "Páginas de la parte pública"
+
+#: options-page.php:72
+msgid "Back office pages"
+msgstr "Páginas de administración"
+
+#: options-page.php:75
+msgid "Add JavaScript code"
+msgstr "Adicionar código JavaScript"
+
+#: options-page.php:76
+msgid "If you uncheck this box, Content Switcher will never add any JavaScript code to the pages of your website, but Google Analytics and Google Optimizer will not work."
+msgstr "Si usted deselecciona esta caja, Content Switcher nunca añadirá código JavaScript a las páginas de su sitio web, pero ni Google Analytics ni Google Optimizer funcionarán."
+
+#: options-page.php:77
+msgid "Save Changes"
+msgstr "Salvar cambios"
+
+msgid "Display a variable content"
+msgstr "Mostrar un contenido variable"
+
+msgid "Display a random content"
+msgstr "Mostrar un contenido aleatorio"
+
+msgid "Hide this box"
+msgstr "Esconder esta caja"
+
+#, fuzzy
+msgid "Delete the options of Content Switcher"
+msgstr "¿Está seguro que desea restaurar las opciones de Content Switcher?"
+
+#, fuzzy
+msgid "Reset the options of Content Switcher"
+msgstr "¿Está seguro que desea restaurar las opciones de Content Switcher?"
+
+msgid "Delete the options of Content Switcher for all sites in this network"
+msgstr ""
+
+#, fuzzy
+msgid "Do you really want to permanently delete the options of Content Switcher for all sites in this network?"
+msgstr "¿Está seguro que desea borrar permanentemente las opciones de Content Switcher?"
+
