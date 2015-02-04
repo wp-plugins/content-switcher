@@ -4,7 +4,7 @@ if ((isset($_POST['submit'])) && (check_admin_referer($_GET['page']))) {
 if ($_GET['action'] == 'reset') { reset_content_switcher(); } else { uninstall_content_switcher($for); } } ?>
 <div class="wrap">
 <h2>Content Switcher</h2>
-<ul class="subsubsub"><li><a href="http://www.kleor.com/content-switcher"><?php _e('Documentation', 'content-switcher'); ?></a></li></ul>
+<ul class="subsubsub"><li><a href="http://www.kleor.com/content-switcher/"><?php _e('Documentation', 'content-switcher'); ?></a></li></ul>
 <div class="clear"></div>
 <?php if (isset($_POST['submit'])) {
 echo '<div class="updated"><p><strong>'.($_GET['action'] == 'reset' ? __('Options reset.', 'content-switcher') : __('Options deleted.', 'content-switcher')).'</strong></p></div>
@@ -13,19 +13,21 @@ echo '<div class="updated"><p><strong>'.($_GET['action'] == 'reset' ? __('Option
 <form method="post" action="<?php echo esc_attr($_SERVER['REQUEST_URI']); ?>">
 <?php wp_nonce_field($_GET['page']); ?>
 <div class="alignleft actions">
-<?php if ($_GET['action'] == 'reset') { _e('Do you really want to reset the options of Content Switcher?', 'content-switcher'); }
+<p><strong style="color: #c00000;"><?php if ($_GET['action'] == 'reset') { _e('Do you really want to reset the options of Content Switcher?', 'content-switcher'); }
 elseif ($for == 'network') { _e('Do you really want to permanently delete the options of Content Switcher for all sites in this network?', 'content-switcher'); }
-else { _e('Do you really want to permanently delete the options of Content Switcher?', 'content-switcher'); } ?> 
+else { _e('Do you really want to permanently delete the options of Content Switcher?', 'content-switcher'); } ?></strong> 
 <input type="submit" class="button-secondary" name="submit" id="submit" value="<?php _e('Yes', 'content-switcher'); ?>" />
+<span class="description"><?php _e('This action is irreversible.', 'content-switcher'); ?></span></p>
 </div>
 </form><?php } ?>
 </div><?php }
 
 else {
 if ((isset($_POST['submit'])) && (check_admin_referer($_GET['page']))) {
-include CONTENT_SWITCHER_PATH.'initial-options.php';
 foreach ($_POST as $key => $value) {
 if (is_string($value)) { $_POST[$key] = stripslashes(html_entity_decode(str_replace('&nbsp;', ' ', $value))); } }
+include CONTENT_SWITCHER_PATH.'initial-options.php';
+foreach ($initial_options as $key => $value) { if (!isset($_POST[$key])) { $_POST[$key] = ''; } }
 foreach (array(
 'administrator_tracked',
 'author_tracked',
@@ -35,10 +37,8 @@ foreach (array(
 'front_office_tracked',
 'javascript_enabled',
 'subscriber_tracked',
-'visitor_tracked') as $field) { if (!isset($_POST[$field])) { $_POST[$field] = 'no'; } }
-foreach ($initial_options as $key => $value) {
-if ((isset($_POST[$key])) && ($_POST[$key] != '')) { $options[$key] = $_POST[$key]; }
-else { $options[$key] = $value; } }
+'visitor_tracked') as $field) { if ($_POST[$field] != 'yes') { $_POST[$field] = 'no'; } }
+foreach ($initial_options as $key => $value) { if ($_POST[$key] == '') { $_POST[$key] = $value; } $options[$key] = $_POST[$key]; }
 update_option('content_switcher', $options); }
 else { $options = (array) get_option('content_switcher'); }
 
@@ -47,7 +47,7 @@ if (is_string($value)) { $options[$key] = htmlspecialchars($value); } } ?>
 
 <div class="wrap">
 <h2>Content Switcher</h2>
-<ul class="subsubsub"><li><a href="http://www.kleor.com/content-switcher"><?php _e('Documentation', 'content-switcher'); ?></a></li></ul>
+<ul class="subsubsub"><li><a href="http://www.kleor.com/content-switcher/"><?php _e('Documentation', 'content-switcher'); ?></a></li></ul>
 <div class="clear"></div>
 <?php if (isset($_POST['submit'])) { echo '<div class="updated"><p><strong>'.__('Settings saved.', 'content-switcher').'</strong></p></div>'; } ?>
 <h3><?php _e('Options', 'content-switcher'); ?></h3>

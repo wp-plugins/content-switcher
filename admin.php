@@ -9,7 +9,8 @@ add_action('admin_menu', 'content_switcher_options_page');
 
 
 function content_switcher_options_page_css() { ?>
-<style type="text/css">
+<style type="text/css" media="all">
+.wrap .description { color: #808080; }
 .wrap h2 { float: left; }
 .wrap input.button-secondary, .wrap select { vertical-align: 0; }
 .wrap p.submit { margin: 0 20%; }
@@ -27,8 +28,8 @@ $links = array(
 '#variable-contents' => __('Display a variable content', 'content-switcher'),
 '#random-contents' => __('Display a random content', 'content-switcher'),
 '#screen-options-wrap' => __('Hide this box', 'content-switcher')); ?>
-<p><a target="_blank" href="http://www.kleor.com/content-switcher/"><?php echo $links['']; ?></a>
- | <a style="color: #808080;" href="#screen-options-wrap" onclick="document.getElementById('show-settings-link').click(); document.getElementById('content-switcher-hide').click();"><?php echo $links['#screen-options-wrap']; ?></a></p>
+<p><a target="_blank" href="http://www.kleor.com/content-switcher/"><?php echo $links['']; ?></a><span id="content-switcher-screen-options-link"></span></p>
+<script type="text/javascript">document.getElementById("content-switcher-screen-options-link").innerHTML = ' | <a style="color: #808080;" href="#screen-options-wrap" onclick="document.getElementById(\'show-settings-link\').click(); document.getElementById(\'content-switcher-hide\').click();"><?php echo $links['#screen-options-wrap']; ?></a>';</script>
 <ul>
 <?php foreach (array('', '#screen-options-wrap') as $url) { unset($links[$url]); }
 foreach ($links as $url => $text) {
@@ -57,7 +58,7 @@ foreach (array('', 'network_admin_') as $prefix) { add_filter($prefix.'plugin_ac
 function content_switcher_row_meta($links, $file) {
 if ($file == CONTENT_SWITCHER_FOLDER.'/content-switcher.php') {
 $links = array_merge($links, array(
-'<a href="http://www.kleor.com/content-switcher">'.__('Documentation', 'content-switcher').'</a>')); }
+'<a href="http://www.kleor.com/content-switcher/">'.__('Documentation', 'content-switcher').'</a>')); }
 return $links; }
 
 add_filter('plugin_row_meta', 'content_switcher_row_meta', 10, 2);

@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: Content Switcher
-Plugin URI: http://www.kleor.com/content-switcher
+Plugin URI: http://www.kleor.com/content-switcher/
 Description: Allows you to easily display a random number, a random or variable content on your website, and to optimize your website with Google Optimizer and Google Analytics.
-Version: 3.6.1
+Version: 3.6.2
 Author: Kleor
 Author URI: http://www.kleor.com
 Text Domain: content-switcher
@@ -45,30 +45,20 @@ function analytics_tracking_js() { include CONTENT_SWITCHER_PATH.'includes/analy
 
 if (content_switcher_data('javascript_enabled') == 'yes') {
 if (content_switcher_data('back_office_tracked') == 'yes') { add_action('admin_footer', 'analytics_tracking_js'); }
-if (content_switcher_data('front_office_tracked') == 'yes') { add_action('wp_footer', 'analytics_tracking_js'); } }
+if (content_switcher_data('front_office_tracked') == 'yes') { foreach (array('login_footer', 'wp_footer') as $hook) { add_action($hook, 'analytics_tracking_js'); } } }
 
 
 function content_switcher_data($atts) { include CONTENT_SWITCHER_PATH.'includes/data.php'; return $data; }
 
 
-function content_switcher_do_shortcode($string) {
-$string = (string) $string;
-$string = do_shortcode(str_replace(array('(', ')'), array('[', ']'), $string));
-$string = str_replace(array('[', ']'), array('(', ')'), $string);
-$string = str_replace(array('&#40;', '&#41;', '&#91;', '&#93;'), array('(', ')', '[', ']'), $string);
-return $string; }
+function content_switcher_do_shortcode($string) { include CONTENT_SWITCHER_PATH.'includes/do-shortcode.php'; return $string; }
 
 
-function content_switcher_filter_data($filter, $data) {
-if (is_string($filter)) { $filter = preg_split('#[^a-zA-Z0-9_]#', str_replace('-', '_', content_switcher_do_shortcode($filter)), 0, PREG_SPLIT_NO_EMPTY); }
-if (is_array($filter)) { foreach ($filter as $function) {
-if (!function_exists($function)) { $function = 'content_switcher_'.$function; }
-if (function_exists($function)) { $data = $function($data); } } }
-return $data; }
+function content_switcher_filter_data($filter, $data) { include CONTENT_SWITCHER_PATH.'includes/filter-data.php'; return $data; }
 
 
 function content_switcher_format_nice_name($string) {
-$string = content_switcher_strip_accents(strtolower(trim(strip_tags($string))));
+$string = strtolower(content_switcher_strip_accents(trim(strip_tags($string))));
 $string = str_replace(' ', '-', $string);
 $string = preg_replace('/[^a-z0-9_-]/', '', $string);
 return $string; }
@@ -96,9 +86,9 @@ function optimizer_tracking_js() { include CONTENT_SWITCHER_PATH.'includes/optim
 if (content_switcher_data('javascript_enabled') == 'yes') { add_action('wp_footer', 'optimizer_tracking_js'); }
 
 
-for ($i = 0; $i < 4; $i++) {
 foreach (array('random', 'variable') as $string) {
-add_shortcode($string.'-content'.($i == 0 ? '' : $i), create_function('$atts, $content', 'include_once CONTENT_SWITCHER_PATH."shortcodes.php"; return '.$string.'_content($atts, $content);')); } }
+$function = create_function('$atts, $content', 'include_once CONTENT_SWITCHER_PATH."shortcodes.php"; return '.$string.'_content($atts, $content);');
+for ($i = 0; $i < 4; $i++) { add_shortcode($string.'-content'.($i == 0 ? '' : $i), $function); } }
 add_shortcode('optimizer-content', create_function('$atts, $content', 'include_once CONTENT_SWITCHER_PATH."shortcodes.php"; return optimizer_content($atts, $content);'));
 foreach (array('random-number', 'variable-string') as $tag) {
 add_shortcode($tag, create_function('$atts', 'include_once CONTENT_SWITCHER_PATH."shortcodes.php"; return '.str_replace('-', '_', $tag).'($atts);')); }

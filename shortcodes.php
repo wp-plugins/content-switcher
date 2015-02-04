@@ -8,6 +8,8 @@ return $string; }
 
 
 function optimizer_content($atts, $content) {
+$atts = array_map('content_switcher_do_shortcode', (array) $atts);
+extract(shortcode_atts(array('name' => 'Content'), $atts));
 $content = do_shortcode($content);
 if (content_switcher_data('javascript_enabled') == 'yes') {
 global $post;
@@ -16,8 +18,6 @@ $optimizer = do_shortcode(get_post_meta($post->ID, 'optimizer', true));
 if (substr($optimizer, 0, 1) != '/') { $optimizer = '/'.$optimizer; }
 $optimizer = explode('/', $optimizer);
 if ((isset($optimizer[2])) && ($optimizer[2] == 'test')) {
-$atts = array_map('content_switcher_do_shortcode', (array) $atts);
-extract(shortcode_atts(array('name' => 'Content'), $atts));
 $content = '<script type="text/javascript">utmx_section("'.$name.'")</script>'
 .$content.'</noscript>'; } }
 return $content; } }
@@ -41,15 +41,13 @@ return $content[$n]; }
 
 function random_number($atts) {
 $atts = array_map('content_switcher_do_shortcode', (array) $atts);
-extract(shortcode_atts(array('digits' => 0, 'filter' => '', 'max' => 0, 'min' => 0, 'set' => ''), $atts));
-if ($set == '') {
-$min = floor($min); $max = floor($max);
-if ($min <= $max) { $n = mt_rand($min, $max); } else { $n = mt_rand($max, $min); } }
+extract(shortcode_atts(array('digits' => '', 'filter' => '', 'max' => '', 'min' => '', 'set' => ''), $atts));
+foreach (array('digits', 'max', 'min') as $variable) { $$variable = (int) preg_replace('/[^0-9]/', '', $$variable); }
+if ($set == '') { if ($min <= $max) { $n = mt_rand($min, $max); } else { $n = mt_rand($max, $min); } }
 else { $set = explode('/', $set); $n = $set[mt_rand(0, count($set) - 1)]; }
 if ($n >= 0) { $symbol = ''; } else { $symbol = '-'; $n = -$n; }
 $number = (string) $n;
 $length = strlen($number);
-$digits = floor($digits);
 while ($length < $digits) { $number = '0'.$number; $length = $length + 1; }
 $number = $symbol.$number;
 $number = content_switcher_filter_data($filter, $number);
@@ -76,16 +74,13 @@ case 'session': $TYPE = $_SESSION; break;
 default: $TYPE = $_GET; }
 
 if (isset($TYPE[$name])) {
-	if ($m == 1) { $n = 0; $content[0] = htmlspecialchars($TYPE[$name]); }
-	else {
-		if ($values == '') { $n = (floor($TYPE[$name]))%$m; }
-		else {
-		$values = explode('/', $values);
-		$v = count($values); $n = 0;
-		for ($i = 0; $i < $v; $i++) { if ($TYPE[$name] == $values[$i]) { $n = $i; } }
-		}
-	}
-}	
+if ($m == 1) { $n = 0; $content[0] = htmlspecialchars($TYPE[$name]); }
+else {
+if ($values == '') { $n = (floor($TYPE[$name]))%$m; }
+else {
+$values = explode('/', $values);
+$v = count($values); $n = 0;
+for ($i = 0; $i < $v; $i++) { if ($TYPE[$name] == $values[$i]) { $n = $i; } } } } }
 else { $n = 0; }
 
 add_shortcode('string', 'content_switcher_string');
