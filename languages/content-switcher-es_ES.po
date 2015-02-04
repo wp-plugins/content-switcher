@@ -1,0 +1,129 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Content Switcher 3.6.2\n"
+"Report-Msgid-Bugs-To: http://www.kleor.com/content-switcher/\n"
+"POT-Creation-Date: 2010-07-07 00:00+0000\n"
+"PO-Revision-Date: 2015-02-04 21:03+0100\n"
+"Last-Translator: Kleor <contact@kleor.com>\n"
+"Language-Team: Kleor <contact@kleor.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
+"Language: fr\n"
+"X-Generator: Poedit 1.5.5\n"
+
+msgid "Allows you to easily display a random number, a random or variable content on your website, and to optimize your website with Google Optimizer and Google Analytics."
+msgstr "Le permite mostrar un número aleatorio fácilmente, un contenido variable o aleatorio en su sitio web, y optimizar su sitio web con Google Optimizer y Google Analytics."
+
+msgid "Uninstall"
+msgstr "Desinstalar"
+
+msgid "Reset"
+msgstr "Resetear"
+
+msgid "Options"
+msgstr "Opciones"
+
+msgid "Documentation"
+msgstr "Documentación"
+
+msgid "no"
+msgstr "no"
+
+msgid "yes"
+msgstr "si"
+
+msgid "Options reset."
+msgstr "Opciones restauradas."
+
+msgid "Options deleted."
+msgstr "Opciones borradas."
+
+msgid "Do you really want to reset the options of Content Switcher?"
+msgstr "¿Está seguro que desea restaurar las opciones de Content Switcher?"
+
+msgid "Do you really want to permanently delete the options of Content Switcher?"
+msgstr "¿Está seguro que desea borrar permanentemente las opciones de Content Switcher?"
+
+msgid "Yes"
+msgstr "Sí"
+
+msgid "Settings saved."
+msgstr "Ajustes salvados."
+
+msgid "Google Analytics Account Tracking ID:"
+msgstr "ID de Trackeo de Google Analytics Account:"
+
+msgid "Google Optimizer Account Tracking ID:"
+msgstr "ID de Trackeo de Google Optimizer Account:"
+
+msgid "More informations"
+msgstr "Más informaciones"
+
+msgid "Track with Google Analytics the:"
+msgstr "Trackear con Google Analytics los:"
+
+msgid "Administrators"
+msgstr "Administradores"
+
+msgid "Editors"
+msgstr "Editores"
+
+msgid "Authors"
+msgstr "Autores"
+
+msgid "Contributors"
+msgstr "Contribuyentes"
+
+msgid "Subscribers"
+msgstr "Suscriptores"
+
+msgid "Visitors without any role"
+msgstr "Visitantes sin ningún rol"
+
+msgid "you can check several boxes"
+msgstr "usted puede seleccionar varias cajas"
+
+msgid "Front office pages"
+msgstr "Páginas de la parte pública"
+
+msgid "Back office pages"
+msgstr "Páginas de administración"
+
+msgid "Add JavaScript code"
+msgstr "Adicionar código JavaScript"
+
+msgid "If you uncheck this box, Content Switcher will never add any JavaScript code to the pages of your website, but Google Analytics and Google Optimizer will not work."
+msgstr "Si usted deselecciona esta caja, Content Switcher nunca añadirá código JavaScript a las páginas de su sitio web, pero ni Google Analytics ni Google Optimizer funcionarán."
+
+msgid "Save Changes"
+msgstr "Salvar cambios"
+
+msgid "Display a variable content"
+msgstr "Mostrar un contenido variable"
+
+msgid "Display a random content"
+msgstr "Mostrar un contenido aleatorio"
+
+msgid "Hide this box"
+msgstr "Esconder esta caja"
+
+#, fuzzy
+msgid "Delete the options of Content Switcher"
+msgstr "¿Está seguro que desea restaurar las opciones de Content Switcher?"
+
+#, fuzzy
+msgid "Reset the options of Content Switcher"
+msgstr "¿Está seguro que desea restaurar las opciones de Content Switcher?"
+
+msgid "Delete the options of Content Switcher for all sites in this network"
+msgstr ""
+
+#, fuzzy
+msgid "Do you really want to permanently delete the options of Content Switcher for all sites in this network?"
+msgstr "¿Está seguro que desea borrar permanentemente las opciones de Content Switcher?"
+
+msgid "This action is irreversible."
+msgstr ""
+
