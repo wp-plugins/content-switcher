@@ -1,0 +1,126 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Content Switcher 3.6.2\n"
+"Report-Msgid-Bugs-To: http://www.kleor.com/content-switcher/\n"
+"POT-Creation-Date: 2010-07-07 00:00+0000\n"
+"PO-Revision-Date: 2015-02-04 21:05+0100\n"
+"Last-Translator: Kleor <contact@kleor.com>\n"
+"Language-Team: Kleor <contact@kleor.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
+"Language: fr\n"
+"X-Generator: Poedit 1.7.4\n"
+
+msgid "Allows you to easily display a random number, a random or variable content on your website, and to optimize your website with Google Optimizer and Google Analytics."
+msgstr "Omogućava vam da jednostavno prikažete nasumičan broj, nasumičan sadržaj ili varijablu na svom web site-u i da upotrebite Google Optimizer i Google Analytics za optimizaciju svog web site-a."
+
+msgid "Uninstall"
+msgstr "Deinstaliraj"
+
+msgid "Reset"
+msgstr "Vrati na početne vrednosti"
+
+msgid "Options"
+msgstr "Opcije"
+
+msgid "Documentation"
+msgstr "Dokumentacija"
+
+msgid "no"
+msgstr "ne"
+
+msgid "yes"
+msgstr "da"
+
+msgid "Options reset."
+msgstr "Opcije vraćene na početne vrednosti."
+
+msgid "Options deleted."
+msgstr "Opcije obrisane."
+
+msgid "Do you really want to reset the options of Content Switcher?"
+msgstr "Da li zaista želite da vratite opcije za Content Switcher na početne vrednosti?"
+
+msgid "Do you really want to permanently delete the options of Content Switcher?"
+msgstr "Da li zaista želite trajno da obrišete opcije za Content Switcher?"
+
+msgid "Yes"
+msgstr "Da"
+
+msgid "Settings saved."
+msgstr "Podešavanja sačuvana."
+
+msgid "Google Analytics Account Tracking ID:"
+msgstr "ID za praćenje Google Analytics naloga:"
+
+msgid "Google Optimizer Account Tracking ID:"
+msgstr "ID za praćenje Google Optimizer naloga:"
+
+msgid "More informations"
+msgstr "Više informacija"
+
+msgid "Track with Google Analytics the:"
+msgstr "Koristi Google Analytics za praćenje:"
+
+msgid "Administrators"
+msgstr "Administratori"
+
+msgid "Editors"
+msgstr "Urednici"
+
+msgid "Authors"
+msgstr "Autori"
+
+msgid "Contributors"
+msgstr "Saradnici"
+
+msgid "Subscribers"
+msgstr "Pretplatnici"
+
+msgid "Visitors without any role"
+msgstr "Posetioci bez ikakve uloge"
+
+msgid "you can check several boxes"
+msgstr "možete štiklirati nekoliko polja"
+
+msgid "Front office pages"
+msgstr "Front office stranice"
+
+msgid "Back office pages"
+msgstr "Back office stranice"
+
+msgid "Add JavaScript code"
+msgstr "Dodaj JavaScript kod"
+
+msgid "If you uncheck this box, Content Switcher will never add any JavaScript code to the pages of your website, but Google Analytics and Google Optimizer will not work."
+msgstr "Ako poništite štikliranje ovog polja, Content Switcher nikad neće dodati nijedan JavaScript kod stranicama vašeg web site-a, ali Google Analytics i Google Optimizer neće raditi."
+
+msgid "Save Changes"
+msgstr "Sačuvaj izmene"
+
+msgid "Display a variable content"
+msgstr "Prikaži sadržaj varijable"
+
+msgid "Display a random content"
+msgstr "Prikaži nasumičan sadržaj"
+
+msgid "Hide this box"
+msgstr "Sakrij ovaj okvir"
+
+msgid "Delete the options of Content Switcher"
+msgstr "Obriši opcije za Content Switcher"
+
+msgid "Reset the options of Content Switcher"
+msgstr "Vrati opcije za Content Switcher na početne vrednosti"
+
+msgid "Delete the options of Content Switcher for all sites in this network"
+msgstr "Obriši opcije za Content Switcher za sve site-ove u ovoj mreži"
+
+msgid "Do you really want to permanently delete the options of Content Switcher for all sites in this network?"
+msgstr "Da li zaista želite trajno da obrišete opcije za Content Switcher za sve site-ove u ovoj mreži?"
+
+msgid "This action is irreversible."
+msgstr ""
+
