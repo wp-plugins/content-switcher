@@ -1,5 +1,5 @@
 <?php global $post;
-if ((isset($post)) && (is_object($post))) {
+if ((isset($post)) && (is_object($post)) && (isset($post->ID))) {
 $optimizer = do_shortcode(get_post_meta($post->ID, 'optimizer', true));
 if (substr($optimizer, 0, 1) != '/') { $optimizer = '/'.$optimizer; }
 $optimizer = explode('/', $optimizer);

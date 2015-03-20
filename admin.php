@@ -37,11 +37,12 @@ echo '<li><a target="_blank" href="http://www.kleor.com/content-switcher/'.$url.
 </ul>
 <?php }
 
-add_action('add_meta_boxes', create_function('', 'foreach (array("page", "post") as $type) {
-add_meta_box("content-switcher", "Content Switcher", "content_switcher_meta_box", $type, "side"); }'));
+add_action('add_meta_boxes', create_function('', 'if (current_user_can("manage_options")) {
+foreach (array("page", "post") as $type) { add_meta_box("content-switcher", "Content Switcher", "content_switcher_meta_box", $type, "side"); } }'));
 
 
 function content_switcher_action_links($links) {
+if (current_user_can('manage_options')) {
 if (!is_network_admin()) {
 $links = array_merge($links, array(
 '<span class="delete"><a href="options-general.php?page=content-switcher&amp;action=uninstall" title="'.__('Delete the options of Content Switcher', 'content-switcher').'">'.__('Uninstall', 'content-switcher').'</a></span>',
@@ -49,7 +50,7 @@ $links = array_merge($links, array(
 '<a href="options-general.php?page=content-switcher">'.__('Options', 'content-switcher').'</a>')); }
 else {
 $links = array_merge($links, array(
-'<span class="delete"><a href="../options-general.php?page=content-switcher&amp;action=uninstall&amp;for=network" title="'.__('Delete the options of Content Switcher for all sites in this network', 'content-switcher').'">'.__('Uninstall', 'content-switcher').'</a></span>')); }
+'<span class="delete"><a href="../options-general.php?page=content-switcher&amp;action=uninstall&amp;for=network" title="'.__('Delete the options of Content Switcher for all sites in this network', 'content-switcher').'">'.__('Uninstall', 'content-switcher').'</a></span>')); } }
 return $links; }
 
 foreach (array('', 'network_admin_') as $prefix) { add_filter($prefix.'plugin_action_links_'.CONTENT_SWITCHER_FOLDER.'/content-switcher.php', 'content_switcher_action_links', 10, 2); }

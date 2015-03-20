@@ -1,19 +1,10 @@
-<?php function content_switcher_string($atts) {
-$atts = array_map('content_switcher_do_shortcode', (array) $atts);
-extract(shortcode_atts(array('default' => '', 'filter' => ''), $atts));
-$string = $GLOBALS['content_switcher_string'];
-if ($string === '') { $string = $default; }
-$string = content_switcher_filter_data($filter, $string);
-return $string; }
-
-
-function optimizer_content($atts, $content) {
+<?php function content_switcher_optimizer_content($atts, $content) {
 $atts = array_map('content_switcher_do_shortcode', (array) $atts);
 extract(shortcode_atts(array('name' => 'Content'), $atts));
 $content = do_shortcode($content);
 if (content_switcher_data('javascript_enabled') == 'yes') {
 global $post;
-if ((isset($post)) && (is_object($post))) {
+if ((isset($post)) && (is_object($post)) && (isset($post->ID))) {
 $optimizer = do_shortcode(get_post_meta($post->ID, 'optimizer', true));
 if (substr($optimizer, 0, 1) != '/') { $optimizer = '/'.$optimizer; }
 $optimizer = explode('/', $optimizer);
@@ -23,7 +14,7 @@ $content = '<script type="text/javascript">utmx_section("'.$name.'")</script>'
 return $content; } }
 
 
-function random_content($atts, $content) {
+function content_switcher_random_content($atts, $content) {
 $atts = array_map('content_switcher_do_shortcode', (array) $atts);
 extract(shortcode_atts(array('filter' => '', 'string' => ''), $atts));
 if ($string != '') { $string = content_switcher_do_shortcode($string); }
@@ -32,14 +23,14 @@ $GLOBALS['content_switcher_string'] = $string;
 $content = explode('[other]', do_shortcode($content));
 $m = count($content) - 1;
 $n = mt_rand(0, $m);
-add_shortcode('string', 'content_switcher_string');
+remove_shortcode('string'); add_shortcode('string', 'content_switcher_string');
 $content[$n] = content_switcher_filter_data($filter, do_shortcode($content[$n]));
 if (isset($original_content_switcher_string)) { $GLOBALS['content_switcher_string'] = $original_content_switcher_string; }
 remove_shortcode('string');
 return $content[$n]; }
 
 
-function random_number($atts) {
+function content_switcher_random_number($atts) {
 $atts = array_map('content_switcher_do_shortcode', (array) $atts);
 extract(shortcode_atts(array('digits' => '', 'filter' => '', 'max' => '', 'min' => '', 'set' => ''), $atts));
 foreach (array('digits', 'max', 'min') as $variable) { $$variable = (int) preg_replace('/[^0-9]/', '', $$variable); }
@@ -54,7 +45,16 @@ $number = content_switcher_filter_data($filter, $number);
 return $number; }
 
 
-function variable_content($atts, $content) {
+function content_switcher_string($atts) {
+$atts = array_map('content_switcher_do_shortcode', (array) $atts);
+extract(shortcode_atts(array('default' => '', 'filter' => ''), $atts));
+$string = $GLOBALS['content_switcher_string'];
+if ($string === '') { $string = $default; }
+$string = content_switcher_filter_data($filter, $string);
+return $string; }
+
+
+function content_switcher_variable_content($atts, $content) {
 $atts = array_map('content_switcher_do_shortcode', (array) $atts);
 extract(shortcode_atts(array('filter' => '', 'name' => 'content', 'string' => '', 'type' => 'get', 'values' => ''), $atts));
 if ($string != '') { $string = content_switcher_do_shortcode($string); }
@@ -90,7 +90,7 @@ remove_shortcode('string');
 return $content[$n]; }
 
 
-function variable_string($atts) {
+function content_switcher_variable_string($atts) {
 $atts = array_map('content_switcher_do_shortcode', (array) $atts);
 extract(shortcode_atts(array('default' => '', 'filter' => '', 'name' => 'content', 'type' => 'get'), $atts));
 

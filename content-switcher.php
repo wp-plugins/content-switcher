@@ -41,11 +41,11 @@ $content_switcher_options = (array) get_option('content_switcher');
 if ((!isset($content_switcher_options['version'])) || ($content_switcher_options['version'] != CONTENT_SWITCHER_VERSION)) { install_content_switcher(); }
 
 
-function analytics_tracking_js() { include CONTENT_SWITCHER_PATH.'includes/analytics-tracking-js.php'; }
+function content_switcher_analytics_tracking_js() { include CONTENT_SWITCHER_PATH.'includes/analytics-tracking-js.php'; }
 
 if (content_switcher_data('javascript_enabled') == 'yes') {
-if (content_switcher_data('back_office_tracked') == 'yes') { add_action('admin_footer', 'analytics_tracking_js'); }
-if (content_switcher_data('front_office_tracked') == 'yes') { foreach (array('login_footer', 'wp_footer') as $hook) { add_action($hook, 'analytics_tracking_js'); } } }
+if (content_switcher_data('back_office_tracked') == 'yes') { add_action('admin_footer', 'content_switcher_analytics_tracking_js'); }
+if (content_switcher_data('front_office_tracked') == 'yes') { foreach (array('login_footer', 'wp_footer') as $hook) { add_action($hook, 'content_switcher_analytics_tracking_js'); } } }
 
 
 function content_switcher_data($atts) { include CONTENT_SWITCHER_PATH.'includes/data.php'; return $data; }
@@ -69,6 +69,16 @@ load_plugin_textdomain('content-switcher', false, CONTENT_SWITCHER_FOLDER.'/lang
 return __(__($string), 'content-switcher'); }
 
 
+function content_switcher_optimizer_control_js() { include CONTENT_SWITCHER_PATH.'includes/optimizer-control-js.php'; }
+
+if (content_switcher_data('javascript_enabled') == 'yes') { add_action('wp_head', 'content_switcher_optimizer_control_js'); }
+
+
+function content_switcher_optimizer_tracking_js() { include CONTENT_SWITCHER_PATH.'includes/optimizer-tracking-js.php'; }
+
+if (content_switcher_data('javascript_enabled') == 'yes') { add_action('wp_footer', 'content_switcher_optimizer_tracking_js'); }
+
+
 function content_switcher_strip_accents($string) {
 return str_replace(
 explode(' ', 'á à â ä ã å ç é è ê ë í ì î ï ñ ó ò ô ö õ ø ú ù û ü ý ÿ Á À Â Ä Ã Å Ç É È Ê Ë Í Ì Î Ï Ñ Ó Ò Ô Ö Õ Ø Ú Ù Û Ü Ý Ÿ'),
@@ -76,23 +86,20 @@ explode(' ', 'a a a a a a c e e e e i i i i n o o o o o o u u u u y y A A A A A 
 $string); }
 
 
-function optimizer_control_js() { include CONTENT_SWITCHER_PATH.'includes/optimizer-tracking-js.php'; }
-
-if (content_switcher_data('javascript_enabled') == 'yes') { add_action('wp_head', 'optimizer_control_js'); }
-
-
-function optimizer_tracking_js() { include CONTENT_SWITCHER_PATH.'includes/optimizer-control-js.php'; }
-
-if (content_switcher_data('javascript_enabled') == 'yes') { add_action('wp_footer', 'optimizer_tracking_js'); }
-
-
+$tags = array();
 foreach (array('random', 'variable') as $string) {
-$function = create_function('$atts, $content', 'include_once CONTENT_SWITCHER_PATH."shortcodes.php"; return '.$string.'_content($atts, $content);');
-for ($i = 0; $i < 4; $i++) { add_shortcode($string.'-content'.($i == 0 ? '' : $i), $function); } }
-add_shortcode('optimizer-content', create_function('$atts, $content', 'include_once CONTENT_SWITCHER_PATH."shortcodes.php"; return optimizer_content($atts, $content);'));
+$function = create_function('$atts, $content', 'include_once CONTENT_SWITCHER_PATH."shortcodes.php"; return content_switcher_'.$string.'_content($atts, $content);');
+for ($i = 0; $i < 4; $i++) { $tag = $string.'-content'.($i == 0 ? '' : $i); $tags[] = $tag; add_shortcode($tag, $function); } }
+$tags[] = 'optimizer-content'; add_shortcode('optimizer-content', create_function('$atts, $content', 'include_once CONTENT_SWITCHER_PATH."shortcodes.php"; return content_switcher_optimizer_content($atts, $content);'));
 foreach (array('random-number', 'variable-string') as $tag) {
-add_shortcode($tag, create_function('$atts', 'include_once CONTENT_SWITCHER_PATH."shortcodes.php"; return '.str_replace('-', '_', $tag).'($atts);')); }
-add_shortcode('content-switcher', 'content_switcher_data');
+$tags[] = $tag; add_shortcode($tag, create_function('$atts', 'include_once CONTENT_SWITCHER_PATH."shortcodes.php"; return content_switcher_'.str_replace('-', '_', $tag).'($atts);')); }
+$tags[] = 'content-switcher'; add_shortcode('content-switcher', 'content_switcher_data');
+$content_switcher_shortcodes = $tags;
+
+
+function replace_content_switcher_shortcodes($data) { include CONTENT_SWITCHER_PATH.'includes/replace-shortcodes.php'; return $data; }
+
+add_filter('wp_insert_post_data', 'replace_content_switcher_shortcodes', 10, 1);
 
 
 foreach (array(
