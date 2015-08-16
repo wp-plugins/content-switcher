@@ -1,11 +1,11 @@
 <?php function content_switcher_optimizer_content($atts, $content) {
-$atts = array_map('content_switcher_do_shortcode', (array) $atts);
+$atts = array_map('kleor_do_shortcode_in_attribute', (array) $atts);
 extract(shortcode_atts(array('name' => 'Content'), $atts));
-$content = do_shortcode($content);
+$content = kleor_do_shortcode($content);
 if (content_switcher_data('javascript_enabled') == 'yes') {
 global $post;
 if ((isset($post)) && (is_object($post)) && (isset($post->ID))) {
-$optimizer = do_shortcode(get_post_meta($post->ID, 'optimizer', true));
+$optimizer = kleor_do_shortcode(get_post_meta($post->ID, 'optimizer', true));
 if (substr($optimizer, 0, 1) != '/') { $optimizer = '/'.$optimizer; }
 $optimizer = explode('/', $optimizer);
 if ((isset($optimizer[2])) && ($optimizer[2] == 'test')) {
@@ -15,23 +15,23 @@ return $content; } }
 
 
 function content_switcher_random_content($atts, $content) {
-$atts = array_map('content_switcher_do_shortcode', (array) $atts);
+$atts = array_map('kleor_do_shortcode_in_attribute', (array) $atts);
 extract(shortcode_atts(array('filter' => '', 'string' => ''), $atts));
-if ($string != '') { $string = content_switcher_do_shortcode($string); }
+if ($string != '') { $string = kleor_do_shortcode_in_attribute($string); }
 if (isset($GLOBALS['content_switcher_string'])) { $original_content_switcher_string = $GLOBALS['content_switcher_string']; }
 $GLOBALS['content_switcher_string'] = $string;
-$content = explode('[other]', do_shortcode($content));
+$content = explode('[other]', kleor_do_shortcode($content));
 $m = count($content) - 1;
 $n = mt_rand(0, $m);
 remove_shortcode('string'); add_shortcode('string', 'content_switcher_string');
-$content[$n] = content_switcher_filter_data($filter, do_shortcode($content[$n]));
+$content[$n] = content_switcher_filter_data($filter, kleor_do_shortcode($content[$n]));
 if (isset($original_content_switcher_string)) { $GLOBALS['content_switcher_string'] = $original_content_switcher_string; }
 remove_shortcode('string');
 return $content[$n]; }
 
 
 function content_switcher_random_number($atts) {
-$atts = array_map('content_switcher_do_shortcode', (array) $atts);
+$atts = array_map('kleor_do_shortcode_in_attribute', (array) $atts);
 extract(shortcode_atts(array('digits' => '', 'filter' => '', 'max' => '', 'min' => '', 'set' => ''), $atts));
 foreach (array('digits', 'max', 'min') as $variable) { $$variable = (int) preg_replace('/[^0-9]/', '', $$variable); }
 if ($set == '') { if ($min <= $max) { $n = mt_rand($min, $max); } else { $n = mt_rand($max, $min); } }
@@ -46,7 +46,7 @@ return $number; }
 
 
 function content_switcher_string($atts) {
-$atts = array_map('content_switcher_do_shortcode', (array) $atts);
+$atts = array_map('kleor_do_shortcode_in_attribute', (array) $atts);
 extract(shortcode_atts(array('default' => '', 'filter' => ''), $atts));
 $string = $GLOBALS['content_switcher_string'];
 if ($string === '') { $string = $default; }
@@ -55,12 +55,12 @@ return $string; }
 
 
 function content_switcher_variable_content($atts, $content) {
-$atts = array_map('content_switcher_do_shortcode', (array) $atts);
+$atts = array_map('kleor_do_shortcode_in_attribute', (array) $atts);
 extract(shortcode_atts(array('filter' => '', 'name' => 'content', 'string' => '', 'type' => 'get', 'values' => ''), $atts));
-if ($string != '') { $string = content_switcher_do_shortcode($string); }
+if ($string != '') { $string = kleor_do_shortcode_in_attribute($string); }
 if (isset($GLOBALS['content_switcher_string'])) { $original_content_switcher_string = $GLOBALS['content_switcher_string']; }
 $GLOBALS['content_switcher_string'] = $string;
-$content = explode('[other]', do_shortcode($content));
+$content = explode('[other]', kleor_do_shortcode($content));
 $m = count($content);
 
 $type = strtolower($type); switch ($type) {
@@ -84,14 +84,14 @@ for ($i = 0; $i < $v; $i++) { if ($TYPE[$name] == $values[$i]) { $n = $i; } } } 
 else { $n = 0; }
 
 add_shortcode('string', 'content_switcher_string');
-$content[$n] = content_switcher_filter_data($filter, do_shortcode($content[$n]));
+$content[$n] = content_switcher_filter_data($filter, kleor_do_shortcode($content[$n]));
 if (isset($original_content_switcher_string)) { $GLOBALS['content_switcher_string'] = $original_content_switcher_string; }
 remove_shortcode('string');
 return $content[$n]; }
 
 
 function content_switcher_variable_string($atts) {
-$atts = array_map('content_switcher_do_shortcode', (array) $atts);
+$atts = array_map('kleor_do_shortcode_in_attribute', (array) $atts);
 extract(shortcode_atts(array('default' => '', 'filter' => '', 'name' => 'content', 'type' => 'get'), $atts));
 
 $type = strtolower($type); switch ($type) {

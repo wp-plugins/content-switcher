@@ -1,6 +1,6 @@
 <?php global $post;
 if ((isset($post)) && (is_object($post)) && (isset($post->ID))) {
-$optimizer = do_shortcode(get_post_meta($post->ID, 'optimizer', true));
+$optimizer = kleor_do_shortcode(get_post_meta($post->ID, 'optimizer', true));
 if (substr($optimizer, 0, 1) != '/') { $optimizer = '/'.$optimizer; }
 $optimizer = explode('/', $optimizer);
 if ((isset($optimizer[2])) && ($optimizer[2] == 'test')) { ?>
